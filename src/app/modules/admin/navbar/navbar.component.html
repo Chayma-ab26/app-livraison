@@ -1,0 +1,19 @@
+<!-- admin/navbar/navbar.component.html -->
+<nav class="col-md-3 col-lg-2 d-md-block sidebar py-4">
+  <h5 class="text-center mb-4">Admin Panel</h5>
+  <a routerLink="/admin">🏠 Dashboard</a>
+
+  <div class="dropdown">
+    <input type="checkbox" id="dropdownToggle" class="dropdown-toggle-checkbox" />
+    <label for="dropdownToggle" class="btn btn-secondary dropdown-toggle w-100 text-start">
+      👥 Utilisateurs
+    </label>
+    <ul class="dropdown-menu w-100">
+      <li><a class="dropdown-item" routerLink="./admin/users/user-list">📋 Liste des utilisateurs</a></li>
+      <li><a class="dropdown-item" routerLink="./admin/users/user-add">➕ Ajouter un utilisateur</a></li>
+    </ul>
+  </div>
+
+  <a routerLink="/admin/parametres">⚙️ Paramètres</a>
+  <a routerLink="/login" class="mt-4 text-danger">🔓 Déconnexion</a>
+</nav>

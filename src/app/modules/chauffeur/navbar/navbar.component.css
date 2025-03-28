@@ -1,0 +1,46 @@
+/* Navbar styles */
+.navbar {
+  background-color: #007bff; /* Bleu primaire */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+.navbar .navbar-brand {
+  font-weight: 700; /* Texte en gras pour le logo */
+  font-size: 1.4rem; /* Taille de police */
+}
+
+.navbar-nav .nav-item .nav-link {
+  font-size: 1.1rem; /* Taille de police des liens */
+  padding: 10px 15px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Survol du lien avec effet */
+  border-radius: 5px; /* Coins arrondis au survol */
+}
+
+.navbar-nav .nav-item.active .nav-link {
+  font-weight: bold; /* Rendre le lien actif plus visible */
+  color: #fff; /* Assurer que le texte du lien actif reste blanc */
+}
+
+/* Modifier l'icône hamburger pour mobile */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+/* Espacement en haut pour éviter que la navbar chevauche le contenu */
+body {
+  padding-top: 60px; /* Décalage de la navbar */
+}
+
+/* Modifier le fond au survol du lien */
+.navbar-nav .nav-item .nav-link.active,
+.navbar-nav .nav-item .nav-link:hover {
+  color: #f8f9fa !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}

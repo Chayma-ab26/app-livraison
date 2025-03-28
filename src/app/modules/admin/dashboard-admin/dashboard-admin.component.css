@@ -1,0 +1,18 @@
+body {
+  padding-top: 60px; /* Ajuste selon la hauteur de la navbar */
+  display: flex;
+  margin-top: 50px;
+}
+
+.sidebar {
+  width: 250px; /* Ajuste selon ta sidebar */
+  height: 100vh;
+  position: fixed;
+  left: 0;
+}
+
+.content {
+  margin-left: 250px; /* Décale le contenu pour ne pas être sous la sidebar */
+  width: calc(100% - 250px); /* Prend tout l’espace restant */
+  padding: 20px;
+}

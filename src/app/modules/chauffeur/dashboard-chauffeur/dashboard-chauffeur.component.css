@@ -1,0 +1,84 @@
+/* Style pour le Dashboard */
+.container {
+  max-width: 1200px; /* Largeur maximale pour éviter que la page soit trop large */
+}
+
+.card {
+  border-radius: 10px; /* Arrondir les coins des cartes */
+}
+
+.card-body {
+  background-color: #f8f9fa; /* Fond clair pour les cartes */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40; /* Couleur sombre pour le titre */
+}
+
+.card.shadow-sm {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+}
+
+/* Bouton */
+.btn {
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* Table Tâches */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Hover effect for table rows */
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Notifications */
+.list-group-item {
+  font-size: 1.1rem;
+  padding: 15px;
+  border: none;
+}
+
+.list-group-item strong {
+  color: #495057;
+}
+
+.list-group-item span.text-muted {
+  font-size: 0.9rem;
+}
+
+/* Mise en forme de l'interface */
+.row {
+  margin-top: 30px;
+}
+
+/* Alignement centré pour les cartes */
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: #6c757d;
+}

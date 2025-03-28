@@ -1,0 +1,55 @@
+.content {
+  margin-left: 500px; /* Décale le contenu pour ne pas être sous la sidebar */
+  width: calc(100% - 250px); /* Prend tout l’espace restant */
+  padding: 20px;
+}
+
+
+
+/* Conteneur principal */
+.container {
+  margin-top: 80px;  /* Ajuste la distance par rapport à la navbar */
+  max-width: 90%;   /* Assure que le contenu ne dépasse pas la largeur de l'écran */
+  padding-left: 200px; /* Ajouter un léger padding pour ne pas être collé au bord */
+  padding-right: 20px; /* Même pour la droite */
+}
+
+/* Table responsive avec défilement horizontal */
+.table-responsive {
+  overflow-x: auto;  /* Ajoute un défilement horizontal si la table dépasse */
+  -webkit-overflow-scrolling: touch; /* Pour les appareils tactiles */
+}
+
+/* Table, avec largeur maximum et ajout d'un espacement */
+.table {
+  width: 100%;
+  table-layout: fixed; /* Fixe la largeur des colonnes */
+  word-wrap: break-word; /* Évite les débordements de texte */
+  border-radius: 8px;
+  padding-left: 70%;
+}
+
+/* Table row hover effect */
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Ajouter un espacement à l'intérieur de la table */
+th, td {
+  padding: 10px;
+}
+
+/* Ajout d'une barre de défilement horizontale si nécessaire */
+.table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #0d6efd;
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}

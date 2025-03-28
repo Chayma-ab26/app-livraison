@@ -1,0 +1,27 @@
+.container {
+  padding-top: 30px; /* Augmentation de l'espacement en haut pour plus de marge */
+  margin-left: 160px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+h2 {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+input, select {
+  border-radius: 5px;
+}
+
+button {
+  border-radius: 5px;
+}
+
+.text-center {
+  margin-top: 20px;
+}
