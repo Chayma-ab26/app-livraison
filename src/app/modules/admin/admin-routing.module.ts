@@ -5,6 +5,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserAddComponent } from './users/user-add/user-add.component';
 import { authGuard } from '../../guards/auth.guard';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   { path: '', component: DashboardAdminComponent, canActivate: [authGuard] },
@@ -16,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: 'users/user-list', component: UserListComponent },  // Liste des utilisateurs
       { path: 'users/user-add', component: UserAddComponent }, // Ajout utilisateur
-      { path: 'users/user-edit/:id', component: UserEditComponent } // Édition utilisateur
+      { path: 'users/user-edit/:id', component: UserEditComponent }, // Édition utilisateur
+      { path: 'profil/profil', component: ProfilComponent}
     ]
   },
 
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'users/user-list', component: UserListComponent, canActivate: [authGuard] },
   { path: 'users/user-edit/:id', component: UserEditComponent, canActivate: [authGuard] },
   { path: 'users/user-add', component: UserAddComponent, canActivate: [authGuard] },
+  { path: 'profil/profil', component: ProfilComponent, canActivate: [authGuard] },
 
   // Redirection pour les routes inconnues
   { path: '**', redirectTo: '' }

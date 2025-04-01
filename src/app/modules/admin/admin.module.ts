@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { UserAddComponent } from './users/user-add/user-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     UserListComponent,
     UserAddComponent,
     UserEditComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,

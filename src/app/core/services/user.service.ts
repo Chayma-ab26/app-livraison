@@ -59,5 +59,9 @@ export class UserService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
+  // Méthode pour récupérer le nombre de chauffeurs
+  getNombreChauffeurs(): Observable<{ total: number }> {
+    return this.http.get<{ total: number }>(`${this.apiUrl}/count-chauffeurs`);
+  }
 
 }

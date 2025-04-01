@@ -6,11 +6,10 @@
       <div class="card shadow-sm mb-4">
         <div class="card-body">
           <h4 class="card-title">Mon Profil</h4>
-          <p><strong>Nom :</strong> John Doe</p>
-          <p><strong>Email :</strong> johndoeexample.com</p>
-          <p><strong>Rôle :</strong> Chauffeur</p>
+          <p><strong>Nom :</strong>{{ user?.nom }}</p>
+          <p><strong>Email :</strong> {{ user?.email }}</p>
+          <p><strong>Rôle :</strong> {{ user?.role }}</p>
           <p><strong>Statut :</strong> Actif</p>
-          <button class="btn btn-primary w-100">Modifier le profil</button>
         </div>
       </div>
     </div>

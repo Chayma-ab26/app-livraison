@@ -3,12 +3,12 @@ import { User } from '../../../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-dashboard-chauffeur',
+  selector: 'app-profil',
   standalone: false,
-  templateUrl: './dashboard-chauffeur.component.html',
-  styleUrl: './dashboard-chauffeur.component.css'
+  templateUrl: './profil.component.html',
+  styleUrl: './profil.component.css'
 })
-export class DashboardChauffeurComponent implements OnInit {
+export class ProfilComponent implements OnInit {
   user: User | null = null;
   errorMessage: string | null = null;
 
@@ -44,3 +44,4 @@ export class DashboardChauffeurComponent implements OnInit {
       );
 }
 }
+

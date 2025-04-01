@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../../../models/user';
 
 @Component({
-  selector: 'app-dashboard-chauffeur',
-  standalone: false,
-  templateUrl: './dashboard-chauffeur.component.html',
-  styleUrl: './dashboard-chauffeur.component.css'
+  selector: 'app-profil',
+  standalone:false,
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.css']
 })
-export class DashboardChauffeurComponent implements OnInit {
+export class ProfilComponent implements OnInit {
   user: User | null = null;
   errorMessage: string | null = null;
 
