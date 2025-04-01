@@ -31,7 +31,7 @@ namespace application_Livraison.Controllers
                                            Id = u.Id,
                                            Nom = u.Nom,
                                            Email = u.Email,
-                                           Role=u.Role
+                                           Role = u.Role
                                        })
                                        .ToListAsync();
             return Ok(users);
@@ -49,7 +49,7 @@ namespace application_Livraison.Controllers
                                          Id = u.Id,
                                          Nom = u.Nom,
                                          Email = u.Email,
-                                         Role =u.Role
+                                         Role = u.Role
                                      })
                                      .FirstOrDefaultAsync();
 
@@ -84,9 +84,9 @@ namespace application_Livraison.Controllers
                 Id = user.Id,
                 Nom = user.Nom,
                 Email = user.Email,
-                MotDePasse=user.MotDePasse,
+                MotDePasse = user.MotDePasse,
 
-                 Role=user.Role
+                Role = user.Role
             };
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, userDto);
@@ -172,7 +172,7 @@ namespace application_Livraison.Controllers
                                           Id = u.Id,
                                           Nom = u.Nom,
                                           Email = u.Email,
-                                          Role=u.Role
+                                          Role = u.Role
                                       })
                                       .FirstOrDefaultAsync();
 
@@ -194,13 +194,19 @@ namespace application_Livraison.Controllers
                                            Id = u.Id,
                                            Nom = u.Nom,
                                            Email = u.Email,
-                                           Role= u.Role
+                                           Role = u.Role
                                        })
                                        .ToListAsync();
             return Ok(users);
         }
-    }
 
+        [HttpGet("count-chauffeurs")]
+        public async Task<IActionResult> GetNombreChauffeurs()
+        {
+            var count = await _context.Utilisateurs.CountAsync(u => u.Role == "Chauffeur");
+            return Ok(new { total = count });
+        }
+    }
     public class UserDto
     {
         public int Id { get; set; }
@@ -212,184 +218,3 @@ namespace application_Livraison.Controllers
 
     }
 }
-
-/*using application_Livraison.Data;
-using application_Livraison.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace application_Livraison.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
-    {
-        private readonly ApplicationDbContext _context;
-
-        public UserController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // ✅ Admin peut voir tous les utilisateurs
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
-            return await _context.Utilisateurs.ToListAsync();
-        }
-
-        // ✅ Admin peut voir un utilisateur par ID
-        [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            var user = await _context.Utilisateurs.FindAsync(id);
-            if (user == null) return NotFound();
-            return user;
-        }
-
-        // ✅ Admin peut créer un utilisateur
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.Utilisateurs.Add(user);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-        }
-
-        // ✅ Admin peut modifier un utilisateur
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> PutUser(int id, User user)
-        {
-            if (id != user.Id) return BadRequest();
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Utilisateurs.Any(e => e.Id == id))
-                    return NotFound();
-                else
-                    throw;
-            }
-
-            return NoContent();
-        }
-
-        // ✅ Admin peut supprimer un utilisateur
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Utilisateurs.FindAsync(id);
-            if (user == null) return NotFound();
-
-            _context.Utilisateurs.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        // ✅ Exemple : route accessible à tous (sans restriction de rôle)
-        [HttpGet("profile")]
-        [Authorize]
-        public async Task<ActionResult<User>> GetProfile()
-        {
-            var username = User.Identity?.Name;
-            var user = await _context.Utilisateurs.FirstOrDefaultAsync(u => u.Nom == username);
-            if (user == null) return NotFound();
-            return user;
-        }
-
-        [HttpGet("test")]
-        public async Task<IActionResult> TestUsers()
-        {
-            var users = await _context.Utilisateurs.ToListAsync();
-            return Ok(users);
-        }
-    }
-    }*/
-/*
-using application_Livraison.Data;
-using application_Livraison.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace application_Livraison.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
-    {
-        private readonly ApplicationDbContext _context;
-
-        public UserController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/User
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
-            return await _context.Utilisateurs.ToListAsync();
-        }
-
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            var user = await _context.Utilisateurs.FindAsync(id);
-            if (user == null)
-                return NotFound();
-
-            return user;
-        }
-
-        // POST: api/User
-        [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
-        {
-            _context.Utilisateurs.Add(user);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-        }
-
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, User user)
-        {
-            if (id != user.Id)
-                return BadRequest();
-
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Utilisateurs.FindAsync(id);
-            if (user == null)
-                return NotFound();
-
-            _context.Utilisateurs.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-    }
-}
-*/

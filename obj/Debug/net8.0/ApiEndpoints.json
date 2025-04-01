@@ -126,6 +126,16 @@
   },
   {
     "ContainingType": "application_Livraison.Controllers.UserController",
+    "Method": "GetNombreChauffeurs",
+    "RelativePath": "api/User/count-chauffeurs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "application_Livraison.Controllers.UserController",
     "Method": "GetProfile",
     "RelativePath": "api/User/profile",
     "HttpMethod": "GET",
