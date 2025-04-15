@@ -241,6 +241,7 @@ D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.AssemblyInfo.
 D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.csproj.CoreCompileInputs.cache
 D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.MvcApplicationPartsAssemblyInfo.cs
 D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.MvcApplicationPartsAssemblyInfo.cache
+D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.sourcelink.json
 D:\C#\application-Livraison\obj\Debug\net8.0\scopedcss\bundle\application-Livraison.styles.css
 D:\C#\application-Livraison\obj\Debug\net8.0\staticwebassets.build.json
 D:\C#\application-Livraison\obj\Debug\net8.0\staticwebassets.development.json
@@ -258,4 +259,3 @@ D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.pdb
 D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.genruntimeconfig.cache
 D:\C#\application-Livraison\obj\Debug\net8.0\ref\application-Livraison.dll
 D:\C#\application-Livraison\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
-D:\C#\application-Livraison\obj\Debug\net8.0\application-Livraison.sourcelink.json

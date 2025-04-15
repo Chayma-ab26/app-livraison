@@ -206,6 +206,22 @@ namespace application_Livraison.Controllers
             var count = await _context.Utilisateurs.CountAsync(u => u.Role == "Chauffeur");
             return Ok(new { total = count });
         }
+
+
+        [HttpGet("chauffeurs")]
+        public async Task<IActionResult> GetChauffeurs()
+        {
+            var chauffeurs = await _context.Utilisateurs
+                .Where(u => u.Role == "chauffeur")  // Filtrer les utilisateurs avec le rôle "chauffeur"
+                .ToListAsync();
+
+            if (chauffeurs == null || !chauffeurs.Any())
+            {
+                return NotFound(new { message = "Aucun chauffeur trouvé." });
+            }
+
+            return Ok(chauffeurs);
+        }
     }
     public class UserDto
     {

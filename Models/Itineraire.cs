@@ -3,7 +3,8 @@
     public class Itineraire
     {
         public int Id { get; set; }
-        public string PointsDePassage { get; set; } // ou liste de points GPS en JSON
+        public List<string> PointsDePassage { get; set; }
+        // ou liste de points GPS en JSON
         public double Distance { get; set; }
         public TimeSpan DureeEstimee { get; set; }
 

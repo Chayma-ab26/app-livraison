@@ -10,7 +10,8 @@
         public string Statut { get; set; } // Exemple : "En cours", "Terminée"
 
         // Créée par Admin
-        public int AdminId { get; set; }
+        public int? AdminId { get; set; }
+
         public User Admin { get; set; }
 
         // Assignée au Chauffeur
