@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg rounded">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Détails de la Livraison #{{ livraison?.id }}</h4>
+        </div>
+        <div class="card-body" *ngIf="livraison">
+          <p><strong>🧍 Client :</strong> {{ livraison.client }}</p>
+          <p><strong>📍 Adresse :</strong> {{ livraison.adresseLivraison }}</p>
+          <p><strong>📦 Produit :</strong> {{ livraison.produit }}</p>
+          <p><strong>📌 Statut :</strong>
+            <span class="badge bg-info text-dark">{{ livraison.statut }}</span>
+          </p>
+          <hr>
+          <p><strong>👤 Créée par :</strong> {{ livraison.admin?.nom }}</p>
+          <p><strong>🚚 Chauffeur assigné :</strong> {{ livraison.chauffeur?.nom }}</p>
+
+          <!-- Optionnel -->
+          <!--
+          <div *ngIf="livraison.itineraire">
+            <h5 class="mt-4">🗺️ Itinéraire</h5>
+            <p><strong>Départ :</strong> {{ livraison.itineraire.pointDepart }}</p>
+            <p><strong>Arrivée :</strong> {{ livraison.itineraire.pointArrivee }}</p>
+          </div>
+          -->
+
+          <div class="text-end mt-4">
+            <a routerLink="/admin/livraison/list-livraison" class="btn btn-secondary">
+              ⬅ Retour à la liste
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

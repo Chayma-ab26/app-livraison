@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <h2 class="text-center mb-4">Créer une Livraison</h2>
+
+      <form [formGroup]="livraisonForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label">Client</label>
+          <input formControlName="Client" type="text" class="form-control" placeholder="Nom du client">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Adresse de Livraison</label>
+          <input formControlName="AdresseLivraison" type="text" class="form-control" placeholder="Adresse complète">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Produit</label>
+          <input formControlName="Produit" type="text" class="form-control" placeholder="Nom du produit">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Chauffeur</label>
+          <select class="form-select" formControlName="ChauffeurId">
+            <option *ngFor="let chauffeur of chauffeurs" [value]="chauffeur.id">
+              {{ chauffeur.nom }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Statut</label>
+          <input formControlName="statut" type="text" class="form-control" placeholder="Statut (En cours...)">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100" [disabled]="!livraisonForm.valid">
+          <i class="fas fa-plus-circle me-1"></i> Créer Livraison
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

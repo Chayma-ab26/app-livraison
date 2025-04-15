@@ -6,6 +6,9 @@ import { UserAddComponent } from './users/user-add/user-add.component';
 import { authGuard } from '../../guards/auth.guard';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ListLivraisonComponent } from './livraison/list-livraison/list-livraison.component';
+import { AddLivraisonComponent } from './livraison/add-livraison/add-livraison.component';
+import { LivraisonDetailsComponent } from './livraison/livraison-details/livraison-details.component';
 
 const routes: Routes = [
   { path: '', component: DashboardAdminComponent, canActivate: [authGuard] },
@@ -18,7 +21,12 @@ const routes: Routes = [
       { path: 'users/user-list', component: UserListComponent },  // Liste des utilisateurs
       { path: 'users/user-add', component: UserAddComponent }, // Ajout utilisateur
       { path: 'users/user-edit/:id', component: UserEditComponent }, // Édition utilisateur
-      { path: 'profil/profil', component: ProfilComponent}
+      { path: 'profil/profil', component: ProfilComponent},
+      { path: 'livraison/list-livraison', component: ListLivraisonComponent},
+      { path: 'livraison/add-livraison', component: AddLivraisonComponent},
+      { path: 'livraison-details/:id', component: LivraisonDetailsComponent}
+
+
     ]
   },
 
@@ -27,6 +35,11 @@ const routes: Routes = [
   { path: 'users/user-edit/:id', component: UserEditComponent, canActivate: [authGuard] },
   { path: 'users/user-add', component: UserAddComponent, canActivate: [authGuard] },
   { path: 'profil/profil', component: ProfilComponent, canActivate: [authGuard] },
+
+  //routes livraison
+  { path: 'livraison/list-livraison', component: ListLivraisonComponent, canActivate: [authGuard] },
+  { path: 'livraison/add-livraison', component: AddLivraisonComponent, canActivate: [authGuard] },
+  { path: 'livraison/livraison-details/:id', component: LivraisonDetailsComponent, canActivate: [authGuard] },
 
   // Redirection pour les routes inconnues
   { path: '**', redirectTo: '' }
