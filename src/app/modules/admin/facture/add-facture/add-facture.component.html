@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h3 class="mb-4">Créer une Facture</h3>
+
+  <form [formGroup]="factureForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Livraison</label>
+      <select class="form-select" formControlName="livraisonId">
+        <option value="">-- Sélectionner une livraison --</option>
+        <option *ngFor="let l of livraisons" [value]="l.id">
+          Livraison #{{ l.id }} - {{ l.client }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Client</label>
+      <input class="form-control" formControlName="client" readonly />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Adresse Livraison</label>
+      <input class="form-control" formControlName="adresseLivraison" readonly />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Produit</label>
+      <input class="form-control" formControlName="produit" readonly />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Prix Produit</label>
+      <input type="number" class="form-control" formControlName="prixProduit" />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Prix Livraison</label>
+      <input type="number" class="form-control" formControlName="prixLivraison" />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Prix Total</label>
+      <input type="number" class="form-control" formControlName="prixTotal" readonly />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Date d'Émission</label>
+      <input type="date" class="form-control" formControlName="dateEmission" />
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-success" type="submit" [disabled]="factureForm.invalid">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <h3 class="mb-4">Liste des Factures</h3>
+
+  <table class="table table-hover table-bordered shadow-sm rounded">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Client</th>
+        <th>Produit</th>
+        <th>Total (€)</th>
+        <th>Date d'Émission</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let facture of factures">
+        <td>{{ facture.id }}</td>
+        <td>{{ facture.client }}</td>
+        <td>{{ facture.produit }}</td>
+        <td>{{ facture.prixTotal }}</td>
+        <td>{{ facture.dateEmission | date:'shortDate' }}</td>
+        <td>
+          <button class="btn btn-info btn-sm me-1" (click)="openPreviewModal(facture)">
+            <i class="bi bi-eye"></i> Prévisualiser
+          </button>
+
+          <button class="btn btn-outline-success btn-sm me-1" (click)="exportPDF(facture.id!)">
+            <i class="bi bi-download"></i> Télécharger
+          </button>
+
+          <button class="btn btn-outline-danger btn-sm" (click)="deleteFacture(facture.id!)">
+            <i class="bi bi-trash"></i> Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal d'aperçu de facture -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-dark text-white rounded-top">
+        <h5 class="modal-title" id="previewModalLabel">Aperçu de la Facture</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div *ngIf="selectedFacture">
+          <h4>Facture #{{ selectedFacture.id }}</h4>
+          <p><strong>Client :</strong> {{ selectedFacture.client }}</p>
+          <p><strong>Adresse Livraison :</strong> {{ selectedFacture.adresseLivraison }}</p>
+          <p><strong>Produit :</strong> {{ selectedFacture.produit }}</p>
+          <p><strong>Prix Produit :</strong> {{ selectedFacture.prixProduit }} TND</p>
+          <p><strong>Frais Livraison :</strong> {{ selectedFacture.prixLivraison }} TND</p>
+          <p><strong>Total :</strong> <span class="fw-bold text-success">{{ selectedFacture.prixTotal }} TND</span></p>
+          <p><strong>Date d’émission :</strong> {{ selectedFacture.dateEmission | date }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

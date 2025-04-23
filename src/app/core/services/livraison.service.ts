@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Livraison } from '../../models/livraison';
+import { User } from '../../models/user';
 
+
+export interface Livraison {
+  id: number;
+  client:string ;
+  adresseLivraison: string;
+  produit: string;
+  chauffeur:User
+}
 @Injectable({
   providedIn: 'root'
 })

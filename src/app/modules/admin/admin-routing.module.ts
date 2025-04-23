@@ -9,6 +9,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { ListLivraisonComponent } from './livraison/list-livraison/list-livraison.component';
 import { AddLivraisonComponent } from './livraison/add-livraison/add-livraison.component';
 import { LivraisonDetailsComponent } from './livraison/livraison-details/livraison-details.component';
+import { ListFactureComponent } from './facture/list-facture/list-facture.component';
+import { AddFactureComponent } from './facture/add-facture/add-facture.component';
 
 const routes: Routes = [
   { path: '', component: DashboardAdminComponent, canActivate: [authGuard] },
@@ -24,7 +26,11 @@ const routes: Routes = [
       { path: 'profil/profil', component: ProfilComponent},
       { path: 'livraison/list-livraison', component: ListLivraisonComponent},
       { path: 'livraison/add-livraison', component: AddLivraisonComponent},
-      { path: 'livraison-details/:id', component: LivraisonDetailsComponent}
+      { path: 'livraison-details/:id', component: LivraisonDetailsComponent},
+      { path: 'facture/list-facture', component: ListFactureComponent},
+      { path: 'facture/add-facture', component: AddFactureComponent},
+
+
 
 
     ]
@@ -40,6 +46,9 @@ const routes: Routes = [
   { path: 'livraison/list-livraison', component: ListLivraisonComponent, canActivate: [authGuard] },
   { path: 'livraison/add-livraison', component: AddLivraisonComponent, canActivate: [authGuard] },
   { path: 'livraison/livraison-details/:id', component: LivraisonDetailsComponent, canActivate: [authGuard] },
+//facture
+{ path: 'facture/list-facture', component: ListFactureComponent, canActivate: [authGuard] },
+{ path: 'facture/add-facture', component: AddFactureComponent, canActivate: [authGuard] },
 
   // Redirection pour les routes inconnues
   { path: '**', redirectTo: '' }

@@ -12,6 +12,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { AddLivraisonComponent } from './livraison/add-livraison/add-livraison.component';
 import { ListLivraisonComponent } from './livraison/list-livraison/list-livraison.component';
 import { LivraisonDetailsComponent } from './livraison/livraison-details/livraison-details.component';
+import { ListFactureComponent } from './facture/list-facture/list-facture.component';
+import { AddFactureComponent } from './facture/add-facture/add-facture.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { LivraisonDetailsComponent } from './livraison/livraison-details/livrais
     ProfilComponent,
     AddLivraisonComponent,
     ListLivraisonComponent,
-    LivraisonDetailsComponent
+    LivraisonDetailsComponent,
+    ListFactureComponent,
+    AddFactureComponent
   ],
   imports: [
     CommonModule,

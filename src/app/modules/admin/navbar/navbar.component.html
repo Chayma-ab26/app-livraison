@@ -15,7 +15,7 @@
     </ul>
   </div>
 
-  <!-- ✅ Nouveau Dropdown Livraison -->
+  <!-- Dropdown Livraison -->
   <div class="dropdown">
     <input type="checkbox" id="dropdownToggleLivraison" class="dropdown-toggle-checkbox" />
     <label for="dropdownToggleLivraison" class="btn btn-secondary dropdown-toggle w-100 text-start">
@@ -27,7 +27,18 @@
     </ul>
   </div>
 
+  <!-- ✅ Nouveau Dropdown Facture -->
+  <div class="dropdown">
+    <input type="checkbox" id="dropdownToggleFacture" class="dropdown-toggle-checkbox" />
+    <label for="dropdownToggleFacture" class="btn btn-secondary dropdown-toggle w-100 text-start">
+      🧾 Factures
+    </label>
+    <ul class="dropdown-menu w-100">
+      <li><a class="dropdown-item" routerLink="/admin/facture/list-facture">📋 Liste des factures</a></li>
+      <li><a class="dropdown-item" routerLink="/admin/facture/add-facture">➕ Ajouter une facture</a></li>
+    </ul>
+  </div>
+
   <a routerLink="/admin/profil/profil" class="mt-3">🙍‍♂️ Mon Profil</a>
-  <a routerLink="/admin/parametres">⚙️ Paramètres</a>
   <a routerLink="/login" class="mt-4 text-danger">🔓 Déconnexion</a>
 </nav>

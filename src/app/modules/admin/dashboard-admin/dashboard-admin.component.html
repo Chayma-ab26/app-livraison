@@ -2,34 +2,61 @@
 
 <div class="container-fluid">
   <div class="row">
-    <!-- Content -->
-    <main class="col-md-5 px-md-4 content">
-            <h3 class="fw-bold mb-4">Bienvenue sur le Dashboard Admin 👋</h3>
+    <main class="col-md-10 px-md-4 content">
+      <h3 class="fw-bold mb-4">Bienvenue sur le Dashboard Admin 👋</h3>
 
       <div class="row">
+        <!-- Chauffeurs -->
         <div class="col-md-4 mb-3">
           <div class="card shadow-sm border-0">
             <div class="card-body">
-              <h5 class="card-title">📊 Statistique 1</h5>
-              <p class="card-text">Nombre de chauffeurs: {{ nbChauffeurs }}</p>
+              <h5 class="card-title">📊 Chauffeurs</h5>
+              <p class="card-text">Nombre de chauffeurs : {{ nbChauffeurs }}</p>
             </div>
           </div>
         </div>
 
+        <!-- Courses -->
         <div class="col-md-4 mb-3">
           <div class="card shadow-sm border-0">
             <div class="card-body">
               <h5 class="card-title">🚗 Courses</h5>
-              <p class="card-text">Total du mois : 45</p>
+              <p class="card-text">Total du mois : {{ totalCourses }}</p>
             </div>
           </div>
         </div>
 
+        <!-- Revenus -->
         <div class="col-md-4 mb-3">
           <div class="card shadow-sm border-0">
             <div class="card-body">
               <h5 class="card-title">💰 Revenus</h5>
-              <p class="card-text">€2,350</p>
+              <p class="card-text">€{{ totalRevenus }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Factures -->
+        <div class="col-md-4 mb-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title">📄 Factures</h5>
+              <p class="card-text">
+                Payées : {{ nbFacturesPayees }} |
+                Impayées : {{ nbFacturesImpayees }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graphique des revenus -->
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title">📈 Revenus des 6 derniers mois</h5>
+              <canvas id="revenusChart"></canvas>
             </div>
           </div>
         </div>
