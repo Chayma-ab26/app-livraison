@@ -3,13 +3,14 @@ import { User } from "./user";
 
 export interface Livraison {
   id: number;
-  client: string;
   adresseLivraison: string;
+  Statut: string;
   produit: string;
-  statut: string;
-  adminId: number;
-  admin: User;
+  client: string;
   chauffeurId: number;
-  chauffeur: User;
-  itineraire: Itineraire;
+  adminId: number;
+  admin?: any;       // devient optionnel
+  chauffeur?: any;   // devient optionnel
+  itineraire?: any;  // devient optionnel
 }
+

@@ -66,7 +66,7 @@ export class AddFactureComponent implements OnInit {
     const facture: Facture = this.factureForm.value;
 
     this.factureService.createFacture(facture).subscribe({
-      next: () => this.router.navigate(['/facture']),
+      next: () => this.router.navigate(['/admin/facture/list-facture']),
       error: (err) => console.error('Erreur création facture', err),
     });
   }

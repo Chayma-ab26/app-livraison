@@ -1,7 +1,6 @@
 import { LivraisonService } from './../../../../core/services/livraison.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
-import { User } from '../../../../models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -18,52 +17,53 @@ export class AddLivraisonComponent implements OnInit {
     private fb: FormBuilder,
     private livraisonService: LivraisonService,
     private router: Router,
-    private userservice:UserService
+    private userservice: UserService
   ) {
+    // Création du formulaire
     this.livraisonForm = this.fb.group({
       Client: ['', Validators.required],
       AdresseLivraison: ['', Validators.required],
       Produit: ['', Validators.required],
-      statut: this.fb.control({ value: 'Encours', disabled: true }), // affiché mais non modifiable
-      ChauffeurId: ['', Validators.required]  // Assure-toi d'avoir la liste des chauffeurs dans l'interface
+      Statut: this.fb.control({ value: 'Encours', disabled: true }), // <-- ici avec un grand S
+      ChauffeurId: ['', Validators.required]
     });
-    this.userservice.getChauffeurs().subscribe(data => {
-      this.chauffeurs = data;
-    });
+
   }
 
   ngOnInit(): void {
-    this.getChauffeurs();
+    this.getChauffeurs();  // Récupère la liste des chauffeurs
+  }
 
-   }
-   getChauffeurs() {
+  getChauffeurs() {
     this.userservice.getChauffeurs().subscribe({
       next: (data) => {
-        this.chauffeurs = data;
+        this.chauffeurs = data;  // Assigner les chauffeurs à la variable
       },
       error: (err) => {
         console.error("Erreur récupération des chauffeurs :", err);
       }
     });
   }
+
   onSubmit() {
-    console.log('Form Valid: ', this.livraisonForm.valid);  // Log l'état du formulaire
-    console.log('Form Errors: ', this.livraisonForm.errors);  // Log les erreurs
+  console.log('Form Valid: ', this.livraisonForm.valid);
+  console.log('Form Data: ', this.livraisonForm.getRawValue());
 
-    if (this.livraisonForm.valid) {
-      const formData = this.livraisonForm.getRawValue(); // Inclut les champs désactivés
+  if (this.livraisonForm.valid) {
+    const formData = this.livraisonForm.getRawValue();
+    formData.ChauffeurId = Number(formData.ChauffeurId); // 🚀 Ajout de la conversion ici
 
-      this.livraisonService.addLivraison(formData).subscribe({
-        next: (res) => {
-          alert('Livraison ajoutée avec succès');
-          this.livraisonForm.reset();
-          this.livraisonForm.patchValue({ statut: 'Encours' });
-        },
-        error: (err) => console.error(err)
-      });
-    } else {
-      console.log("Le formulaire est invalide, veuillez vérifier les champs.");
-    }
+    this.livraisonService.addLivraison(formData).subscribe({
+      next: (res) => {
+        alert('Livraison ajoutée avec succès');
+        this.router.navigate(['/admin/livraison/list-livraison']); // 🔥 Redirection ici
+
+      },
+      error: (err) => console.error('Erreur lors de l\'ajout de la livraison:', err)
+    });
+  } else {
+    console.log("Le formulaire est invalide, veuillez vérifier les champs.");
   }
+}
 
 }

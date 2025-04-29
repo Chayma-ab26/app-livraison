@@ -1,16 +1,16 @@
+import { Livraison } from './../../models/livraison';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../../models/user';
 
-
-export interface Livraison {
+/*export interface Livraison {
   id: number;
   client:string ;
   adresseLivraison: string;
   produit: string;
   chauffeur:User
-}
+}*/
 @Injectable({
   providedIn: 'root'
 })
@@ -38,10 +38,26 @@ export class LivraisonService {
 
     // Ajouter une nouvelle livraison (admin uniquement)
     addLivraison(livraison: any): Observable<any> {
-      const token = localStorage.getItem('token');
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.post<any>(this.apiUrl, livraison, { headers });
-    }
+      const token = localStorage.getItem('token');  // Récupérer le token
+      if (!token) {
+          console.error('Token manquant!');
+      }
+
+      const headers = new HttpHeaders()
+          .set('Authorization', `Bearer ${token}`)
+          .set('Content-Type', 'application/json');
+
+      console.log('Form Data:', livraison);  // Afficher les données avant envoi
+
+      return this.http.post<any>(this.apiUrl, livraison, { headers }).pipe(
+          catchError((error: HttpErrorResponse) => {
+              console.error('Erreur complète:', error);  // Afficher l'erreur complète
+              alert('Erreur lors de l\'ajout de la livraison: ' + error.message);
+              return throwError(error);
+          })
+      );
+  }
+
     getChauffeurs(): Observable<any[]> {
       return this.http.get<any[]>(`${this.apiUrl}/chauffeurs`);
     }
@@ -70,6 +86,22 @@ export class LivraisonService {
       );
     }
 
+    getMesLivraisons(): Observable<Livraison[]> {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+      return this.http.get<Livraison[]>(`${this.apiUrl}/mes-livraisons`, { headers });
+    }
+    updateStatus(id: number, newStatus: string) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.put(`/api/livraisons/${id}/status`, newStatus, {
+        headers: { 'Content-Type': 'application/json' },
+        responseType: 'text'
+      });
+    }
 
 
-}
+
+  }
+

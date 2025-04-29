@@ -6,13 +6,15 @@ import { ChauffeurRoutingModule } from './chauffeur-routing.module';
 import { DashboardChauffeurComponent } from './dashboard-chauffeur/dashboard-chauffeur.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
+import { MesLivraisonsComponent } from './mes-livraisons/mes-livraisons.component';
 
 
 @NgModule({
   declarations: [
     DashboardChauffeurComponent,
     NavbarComponent,
-    ProfilComponent
+    ProfilComponent,
+    MesLivraisonsComponent
   ],
   imports: [
     CommonModule,

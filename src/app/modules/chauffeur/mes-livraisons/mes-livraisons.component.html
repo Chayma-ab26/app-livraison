@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+  <h2>Mes Livraisons</h2>
+
+  <table class="table table-striped" *ngIf="livraisons.length > 0; else noData">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>adresseLivraison</th>
+        <th>client</th>
+        <th>Itinéraire</th>
+        <th>Admin</th>
+        <th>Statut</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of livraisons">
+        <td>{{ l.id }}</td>
+        <td>{{ l.  adresseLivraison}}</td>
+        <td>{{ l.client}}</td>
+        <!-- Utilisation de safe navigation pour éviter les erreurs lorsque les objets sont null/undefined -->
+        <td>{{ l.itineraire || 'Non défini' }}</td>
+        <td>{{ l.admin?.nom || 'Non défini' }}</td>
+        <td>{{ l.Statut }}</td>
+       <td>
+  <span class="badge"
+        [ngClass]="{
+          'bg-success': l.Statut === 'Livrée',
+          'bg-warning text-dark': l.Statut === 'Encours',
+          'bg-danger': l.Statut === 'Annulée'
+        }">
+    {{ l.Statut }}
+  </span>
+</td>
+<td>
+  <div *ngIf="l.Statut?.trim()?.toLowerCase() === 'encours'">
+    <button class="btn btn-success btn-sm me-2" (click)="changerStatut(l.id, 'Livrée')">Terminer</button>
+    <button class="btn btn-danger btn-sm" (click)="changerStatut(l.id, 'Annulée')">Rejeter</button>
+  </div>
+  <div *ngIf="l.Statut?.trim()?.toLowerCase() !== 'encours'">
+    <span class="text-muted">Action terminée</span>
+  </div>
+</td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p>Aucune livraison assignée.</p>
+  </ng-template>
+</div>
