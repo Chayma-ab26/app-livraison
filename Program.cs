@@ -3,8 +3,14 @@ using application_Livraison.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using application_Livraison.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+var context = new CustomAssemblyLoadContext();
+context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "lib", "libwkhtmltox.dll"));
 
 // Configuration de la connexion à la base de données
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

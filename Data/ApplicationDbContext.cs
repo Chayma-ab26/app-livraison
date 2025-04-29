@@ -14,6 +14,8 @@ namespace application_Livraison.Data
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Livraison> Livraisons { get; set; }
         public DbSet<Itineraire> Itineraires { get; set; }
+        public DbSet<Facture> Factures { get; set; }
+
         public object User { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,6 +53,11 @@ namespace application_Livraison.Data
                 .HasOne(i => i.Livraison)
                 .WithOne(l => l.Itineraire)
                 .HasForeignKey<Itineraire>(i => i.LivraisonId);
+
+            modelBuilder.Entity<Livraison>()
+               .HasOne(l => l.Facture)
+               .WithOne(f => f.Livraison)
+               .HasForeignKey<Facture>(f => f.LivraisonId);
         }
     }
 }

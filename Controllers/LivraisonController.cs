@@ -72,6 +72,12 @@ namespace application_Livraison.Controllers
         public async Task<ActionResult<Livraison>> CreateLivraison([FromBody] LivraisonCreateDto livraisonDto)
         {
             var adminId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+            if (adminId == 0)
+            {
+                return BadRequest("UserId invalide.");
+            }
+
+            Console.WriteLine($"Données reçues: Client={livraisonDto.Client}, ChauffeurId={livraisonDto.ChauffeurId}");
 
             var livraison = new Livraison
             {
@@ -120,7 +126,7 @@ namespace application_Livraison.Controllers
                 return StatusCode(500, $"Erreur lors de la récupération des chauffeurs : {ex.Message}");
             }
         }
-
+        /*
         // ✅ ADMIN et CHAUFFEUR : Voir une livraison spécifique
         [HttpGet("{id}")]
         [Authorize]
@@ -144,6 +150,82 @@ namespace application_Livraison.Controllers
 
             return Ok(livraison);
         }
+        [HttpGet("mes-livraisons")]
+        [Authorize(Roles = "Chauffeur")]
+        public async Task<ActionResult<IEnumerable<Livraison>>> GetMesLivraisons()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+
+            var mesLivraisons = await _context.Livraisons
+                .Include(l => l.Chauffeur)
+                .Include(l => l.Admin)
+                .Include(l => l.Itineraire)
+                .Where(l => l.ChauffeurId == userId)
+                .ToListAsync();
+
+            return Ok(mesLivraisons);
+        }
+        */
+        // ✅ ADMIN et CHAUFFEUR : Voir une livraison spécifique
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Livraison>> GetLivraisonById(int id)
+        {
+            // Récupérer l'ID de l'utilisateur connecté et son rôle
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            // Log de l'ID de l'utilisateur pour le debug
+            Console.WriteLine($"User ID connecté : {userId}");
+            Console.WriteLine($"Rôle de l'utilisateur : {userRole}");
+
+            // Chercher la livraison spécifique
+            var livraison = await _context.Livraisons
+                .Include(l => l.Chauffeur)
+                .Include(l => l.Admin)
+                .Include(l => l.Itineraire)
+                .FirstOrDefaultAsync(l => l.Id == id);
+
+            // Si la livraison n'existe pas
+            if (livraison == null)
+            {
+                Console.WriteLine("Livraison non trouvée");
+                return NotFound("Livraison non trouvée");
+            }
+
+            // Si l'utilisateur est un chauffeur, vérifier qu'il peut voir la livraison
+            if (userRole == "Chauffeur" && livraison.ChauffeurId != userId)
+            {
+                Console.WriteLine("Accès interdit: le chauffeur ne peut voir que ses livraisons");
+                return Forbid("Vous ne pouvez voir que vos propres livraisons.");
+            }
+
+            // Retourner la livraison trouvée
+            return Ok(livraison);
+        }
+
+        // ✅ ADMIN et CHAUFFEUR : Voir les livraisons du chauffeur connecté
+        [HttpGet("mes-livraisons")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Livraison>>> GetMesLivraisons()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+
+            var mesLivraisons = await _context.Livraisons
+                .Include(l => l.Admin)
+                .Include(l => l.Chauffeur)
+                .Include(l => l.Itineraire)
+                .Where(l => l.ChauffeurId == userId)
+                .ToListAsync();
+
+            if (!mesLivraisons.Any())
+            {
+                return NotFound("Aucune livraison trouvée pour ce chauffeur.");
+            }
+
+            return Ok(mesLivraisons);
+        }
+
 
         // ✅ ADMIN : Réassigner un chauffeur
         [HttpPut("{id}/assign")]

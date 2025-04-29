@@ -17,10 +17,40 @@ namespace application_Livraison.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("ProductVersion", "9.0.0-preview.2.24128.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("application_Livraison.Models.Facture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateEmission")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LivraisonId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrixLivraison")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrixProduit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LivraisonId")
+                        .IsUnique();
+
+                    b.ToTable("Factures");
+                });
 
             modelBuilder.Entity("application_Livraison.Models.Itineraire", b =>
                 {
@@ -59,7 +89,7 @@ namespace application_Livraison.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("AdresseLivraison")
@@ -137,16 +167,25 @@ namespace application_Livraison.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Utilisateurs");
+                });
+
+            modelBuilder.Entity("application_Livraison.Models.Facture", b =>
+                {
+                    b.HasOne("application_Livraison.Models.Livraison", "Livraison")
+                        .WithOne("Facture")
+                        .HasForeignKey("application_Livraison.Models.Facture", "LivraisonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Livraison");
                 });
 
             modelBuilder.Entity("application_Livraison.Models.Itineraire", b =>
@@ -165,8 +204,7 @@ namespace application_Livraison.Migrations
                     b.HasOne("application_Livraison.Models.User", "Admin")
                         .WithMany("LivraisonsCreees")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("application_Livraison.Models.User", "Chauffeur")
                         .WithMany("LivraisonsAttribuees")
@@ -199,6 +237,9 @@ namespace application_Livraison.Migrations
 
             modelBuilder.Entity("application_Livraison.Models.Livraison", b =>
                 {
+                    b.Navigation("Facture")
+                        .IsRequired();
+
                     b.Navigation("Itineraire")
                         .IsRequired();
                 });
