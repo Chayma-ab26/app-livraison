@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using application_Livraison.Data;
 using application_Livraison.Models;
+using static application_Livraison.Controllers.LivraisonCreateDto;
 
 namespace application_Livraison.Controllers
 {
@@ -242,24 +243,43 @@ namespace application_Livraison.Controllers
             return Ok(new { message = "Chauffeur réassigné." });
         }
 
-        // ✅ CHAUFFEUR : Modifier uniquement le statut
+        //update status
         [HttpPut("{id}/status")]
-        [Authorize(Roles = "Chauffeur")]
-        public async Task<IActionResult> UpdateStatus(int id, [FromBody] string newStatus)
+        [Authorize]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] LivraisonStatutDto dto)
         {
+            Console.WriteLine($"🟢 Requête reçue pour l'ID {id} avec statut : {dto?.Statut}");
+
+            // Vérifie si le corps est vide
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Statut))
+            {
+                Console.WriteLine("❌ Corps de la requête invalide.");
+                return BadRequest("Le champ 'statut' est requis.");
+            }
+
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Console.WriteLine($"🔍 userId depuis le token : {userId}");
 
             var livraison = await _context.Livraisons.FindAsync(id);
             if (livraison == null)
+            {
+                Console.WriteLine("❌ Livraison non trouvée.");
                 return NotFound("Livraison non trouvée.");
+            }
+
+            Console.WriteLine($"📦 Livraison trouvée avec ChauffeurId = {livraison.ChauffeurId}");
 
             if (livraison.ChauffeurId != userId)
+            {
+                Console.WriteLine("⛔️ Accès interdit : l'utilisateur ne possède pas cette livraison.");
                 return Forbid("Vous ne pouvez modifier que vos propres livraisons.");
+            }
 
-            livraison.Statut = newStatus;
+            livraison.Statut = dto.Statut.Trim();
             await _context.SaveChangesAsync();
 
-            return Ok("Statut mis à jour.");
+            Console.WriteLine("✅ Statut mis à jour.");
+            return Ok(new { message = "Statut mis à jour." });
         }
 
         // ✅ ADMIN : Supprimer une livraison
@@ -277,6 +297,12 @@ namespace application_Livraison.Controllers
             return Ok(new { message = "Livraison supprimée avec succès" });
         }
     }
+
+    public class LivraisonStatutDto
+    {
+        public string Statut { get; set; }
+    }
+
     public class LivraisonCreateDto
     {
         public string Client { get; set; }
@@ -284,12 +310,13 @@ namespace application_Livraison.Controllers
         public string Produit { get; set; }
         public string Statut { get; set; }
         public int? ChauffeurId { get; set; }
-       // public string NomChauffeur { get; set; }
-       // public string NomAdmin { get; set; }
-       // public int? Itineraire { get; set; }
-
-
+        // public string NomChauffeur { get; set; }
+        // public string NomAdmin { get; set; }
+        // public int? Itineraire { get; set; }
+      
     }
+    
+
 
 }
 
