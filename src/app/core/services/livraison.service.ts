@@ -92,16 +92,15 @@ export class LivraisonService {
 
       return this.http.get<Livraison[]>(`${this.apiUrl}/mes-livraisons`, { headers });
     }
+
     updateStatus(id: number, newStatus: string) {
       const token = localStorage.getItem('token');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.put(`/api/livraisons/${id}/status`, newStatus, {
-        headers: { 'Content-Type': 'application/json' },
-        responseType: 'text'
-      });
+      return this.http.put<{ message: string }>(
+        `${this.apiUrl}/${id}/status`,
+        { Statut: newStatus },
+        { headers }
+      );
     }
 
-
-
-  }
-
+}

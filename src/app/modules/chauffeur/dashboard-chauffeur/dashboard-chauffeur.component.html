@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="container mt-5">
   <div class="row">
     <!-- Section Profil du Chauffeur -->
@@ -6,7 +7,7 @@
       <div class="card shadow-sm mb-4">
         <div class="card-body">
           <h4 class="card-title">Mon Profil</h4>
-          <p><strong>Nom :</strong>{{ user?.nom }}</p>
+          <p><strong>Nom :</strong> {{ user?.nom }}</p>
           <p><strong>Email :</strong> {{ user?.email }}</p>
           <p><strong>Rôle :</strong> {{ user?.role }}</p>
           <p><strong>Statut :</strong> Actif</p>
@@ -14,48 +15,37 @@
       </div>
     </div>
 
-    <!-- Section Tâches à accomplir -->
+    <!-- Section Statistiques des Livraisons -->
     <div class="col-md-8">
       <div class="card shadow-sm mb-4">
         <div class="card-body">
-          <h4 class="card-title">Tâches à accomplir</h4>
-          <table class="table table-bordered table-striped table-hover">
-            <thead>
-              <tr>
-                <th>ID Tâche</th>
-                <th>Nom Tâche</th>
-                <th>Statut</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Livraison 1</td>
-                <td>
-                  <span class="badge bg-warning text-dark">En cours</span>
-                </td>
-                <td>
-                  <button class="btn btn-info btn-sm">Voir</button>
-                  <button class="btn btn-success btn-sm">Terminer</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Livraison 2</td>
-                <td>
-                  <span class="badge bg-success text-white">Terminé</span>
-                </td>
-                <td>
-                  <button class="btn btn-info btn-sm">Voir</button>
-                  <button class="btn btn-success btn-sm" disabled>Terminé</button>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4" class="text-center text-muted">Aucune autre tâche à afficher</td>
-              </tr>
-            </tbody>
-          </table>
+          <h4 class="card-title">Statistiques des Livraisons</h4>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card bg-warning text-black text-center">
+                <div class="card-body">
+                  <h5 class="card-title">En Cours</h5>
+                  <p class="card-text">{{ enCours }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-success text-black text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Livré</h5>
+                  <p class="card-text">{{ livre }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-danger text-black text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Rejeté</h5>
+                  <p class="card-text">{{ rejete }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

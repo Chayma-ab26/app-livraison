@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
-<div class="container mt-5">
-  <h3 class="mb-4">Créer une Facture</h3>
 
-  <form [formGroup]="factureForm" (ngSubmit)="onSubmit()" class="row g-3">
+<div class="container mt-5">
+  <h3 class="mb-4 text-primary">Créer une Facture</h3>
+
+  <form [formGroup]="factureForm" (ngSubmit)="onSubmit()" class="row g-4">
     <div class="col-md-6">
       <label class="form-label">Livraison</label>
-      <select class="form-select" formControlName="livraisonId">
+      <select class="form-select" formControlName="livraisonId" required>
         <option value="">-- Sélectionner une livraison --</option>
         <option *ngFor="let l of livraisons" [value]="l.id">
           Livraison #{{ l.id }} - {{ l.client }}
@@ -29,28 +30,32 @@
     </div>
 
     <div class="col-md-3">
-      <label class="form-label">Prix Produit</label>
-      <input type="number" class="form-control" formControlName="prixProduit" />
+      <label class="form-label">Prix Produit (€)</label>
+      <input type="number" class="form-control" formControlName="prixProduit" required />
     </div>
 
     <div class="col-md-3">
-      <label class="form-label">Prix Livraison</label>
-      <input type="number" class="form-control" formControlName="prixLivraison" />
+      <label class="form-label">Prix Livraison (€)</label>
+      <input type="number" class="form-control" formControlName="prixLivraison" required />
     </div>
 
     <div class="col-md-3">
-      <label class="form-label">Prix Total</label>
+      <label class="form-label">Prix Total (€)</label>
       <input type="number" class="form-control" formControlName="prixTotal" readonly />
     </div>
 
     <div class="col-md-3">
       <label class="form-label">Date d'Émission</label>
-      <input type="date" class="form-control" formControlName="dateEmission" />
+      <input type="date" class="form-control" formControlName="dateEmission" required />
     </div>
 
-    <div class="col-12">
-      <button class="btn btn-success" type="submit" [disabled]="factureForm.invalid">
-        Enregistrer
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-outline-secondary" type="reset">
+        <i class="bi bi-arrow-counterclockwise"></i> Réinitialiser
+      </button>
+
+      <button class="btn btn-primary" type="submit" [disabled]="factureForm.invalid">
+        <i class="bi bi-save"></i> Enregistrer
       </button>
     </div>
   </form>

@@ -35,9 +35,10 @@ export class MesLivraisonsComponent implements OnInit {
   changerStatut(id: number, nouveauStatut: string) {
     if (confirm(`Voulez-vous vraiment changer le statut en "${nouveauStatut}" ?`)) {
       this.livraisonService.updateStatus(id, nouveauStatut).subscribe({
-        next: () => {
-          alert('Statut mis à jour avec succès ✅');
-          this.chargerLivraisons(); // Recharge la liste après modification
+        next: (res) => {
+          console.log('Réponse de l\'API :', res);
+          alert(res?.message || 'Statut mis à jour avec succès ✅');
+          this.chargerLivraisons(); // Recharge la liste après modif
         },
         error: (err) => {
           console.error('Erreur lors de la mise à jour du statut:', err);
@@ -46,5 +47,14 @@ export class MesLivraisonsComponent implements OnInit {
       });
     }
   }
+
+
+  isEncours(Statut: string | undefined): boolean {
+    console.log('Statut brut reçu:', JSON.stringify(Statut));
+    return true; // forcer le bouton à s'afficher pour toutes les lignes
+
+
+  }
+
 
 }

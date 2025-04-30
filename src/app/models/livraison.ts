@@ -4,7 +4,7 @@ import { User } from "./user";
 export interface Livraison {
   id: number;
   adresseLivraison: string;
-  Statut: string;
+  statut: string;
   produit: string;
   client: string;
   chauffeurId: number;
