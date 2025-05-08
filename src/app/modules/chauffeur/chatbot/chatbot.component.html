@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<div class="chat-app-container">
+  <div class="chat-wrapper">
+    <!-- Header du chat -->
+    <div class="chat-header">
+      <div class="d-flex align-items-center">
+        <div class="chatbot-avatar me-3">
+          <img src="assets/images/chatbot-avatar.png" alt="Chatbot Assistant" width="40" height="40">
+        </div>
+        <div>
+          <h5 class="mb-0">Assistant Livraison</h5>
+          <small class="text-muted" >
+          </small>
+        </div>
+      </div>
+      <button class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-three-dots-vertical"></i>
+      </button>
+    </div>
+
+    <!-- Zone de messages -->
+    <div class="chat-messages" #messageContainer>
+      <div *ngFor="let msg of messages" [ngClass]="['message-bubble', msg.sender]">
+        <div class="message-content">
+          <div class="message-sender">
+            <span  class="sender-name">Assistant</span>
+            <span *ngIf="msg.sender === 'user'" class="sender-name">Vous</span>
+          </div>
+          <div class="message-text">{{ msg.text }}</div>
+        </div>
+      </div>
+
+      <!-- Typing indicator -->
+      <div *ngIf="loading" class="message-bubble assistant typing-indicator">
+        <div class="message-content">
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone de saisie -->
+    <div class="chat-input-area">
+      <div class="input-group">
+        <button class="btn btn-outline-secondary" type="button">
+          <i class="bi bi-paperclip"></i>
+        </button>
+        <input
+          [(ngModel)]="userInput"
+          (keyup.enter)="sendMessage()"
+          placeholder="Demande-moi un itinéraire, la météo..."
+          class="form-control"
+        >
+        <button
+          (click)="sendMessage()"
+          [disabled]="loading || !userInput.trim() "
+          class="btn btn-primary"
+          type="button"
+        >
+          <i class="bi bi-send-fill"></i>
+        </button>
+      </div>
+      <small class="text-muted hint-text">
+        <i class="bi bi-lightbulb"></i> Exemples : "Itinéraire pour la livraison #123", "Météo à Paris"
+      </small>
+    </div>
+  </div>
+</div>

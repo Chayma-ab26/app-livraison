@@ -7,6 +7,8 @@ import { DashboardChauffeurComponent } from './dashboard-chauffeur/dashboard-cha
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MesLivraisonsComponent } from './mes-livraisons/mes-livraisons.component';
+import { FormsModule } from '@angular/forms';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 @NgModule({
@@ -14,12 +16,14 @@ import { MesLivraisonsComponent } from './mes-livraisons/mes-livraisons.componen
     DashboardChauffeurComponent,
     NavbarComponent,
     ProfilComponent,
-    MesLivraisonsComponent
+    MesLivraisonsComponent,
+    ChatbotComponent
   ],
   imports: [
     CommonModule,
     ChauffeurRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class ChauffeurModule { }

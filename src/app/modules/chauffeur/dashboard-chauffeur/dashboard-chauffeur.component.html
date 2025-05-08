@@ -1,75 +1,185 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
-  <div class="row">
-    <!-- Section Profil du Chauffeur -->
-    <div class="col-md-4">
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h4 class="card-title">Mon Profil</h4>
-          <p><strong>Nom :</strong> {{ user?.nom }}</p>
-          <p><strong>Email :</strong> {{ user?.email }}</p>
-          <p><strong>Rôle :</strong> {{ user?.role }}</p>
-          <p><strong>Statut :</strong> Actif</p>
+<div class="dashboard-container">
+  <div class="container-fluid py-4">
+    <!-- Header avec bienvenue -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="welcome-card p-4 rounded-4">
+          <h2 class="text-white mb-0">Bonjour, {{ user?.nom }} 👋</h2>
+          <p class="text-white-50 mb-0">Voici votre tableau de bord aujourd'hui</p>
         </div>
       </div>
     </div>
 
-    <!-- Section Statistiques des Livraisons -->
-    <div class="col-md-8">
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h4 class="card-title">Statistiques des Livraisons</h4>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card bg-warning text-black text-center">
-                <div class="card-body">
-                  <h5 class="card-title">En Cours</h5>
-                  <p class="card-text">{{ enCours }}</p>
+    <div class="row g-4">
+      <!-- Section Profil du Chauffeur -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="card profile-card h-100 border-0 shadow-lg">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-4">
+              <div class="avatar bg-primary text-white rounded-circle me-3">
+                {{ user?.nom?.charAt(0) || 'U' }}
+              </div>
+              <div>
+                <h4 class="mb-0">{{ user?.nom }}</h4>
+                <span class="badge bg-success">{{ user?.role }}</span>
+              </div>
+            </div>
+
+            <div class="profile-details">
+              <div class="detail-item">
+                <i class="bi bi-envelope"></i>
+                <div>
+                  <small class="text-muted">Email</small>
+                  <p class="mb-0">{{ user?.email }}</p>
+                </div>
+              </div>
+
+
+
+              <div class="detail-item mt-3">
+                <i class="bi bi-check-circle"></i>
+                <div>
+                  <small class="text-muted">Statut</small>
+                  <p class="mb-0">Actif <span class="status-dot bg-success"></span></p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card bg-success text-black text-center">
-                <div class="card-body">
-                  <h5 class="card-title">Livré</h5>
-                  <p class="card-text">{{ livre }}</p>
+
+            <button class="btn btn-outline-primary w-100 mt-4 rounded-pill">
+              <i class="bi bi-pencil-square me-2"></i>Éditer le profil
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Statistiques -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="card border-0 shadow-lg h-100">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mb-0">Statistiques des Livraisons</h4>
+              <select class="form-select form-select-sm w-auto">
+                <option>Cette semaine</option>
+                <option>Ce mois</option>
+                <option selected>Cette année</option>
+              </select>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="stat-card bg-warning bg-opacity-10 p-3 rounded-4">
+                  <div class="d-flex align-items-center">
+                    <div class="stat-icon bg-warning text-white rounded-circle me-3">
+                      <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div>
+                      <small class="text-muted">En cours</small>
+                      <h3 class="mb-0">{{ enCours }}</h3>
+                    </div>
+                  </div>
+                  <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-warning" style="width: 65%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="stat-card bg-success bg-opacity-10 p-3 rounded-4">
+                  <div class="d-flex align-items-center">
+                    <div class="stat-icon bg-success text-white rounded-circle me-3">
+                      <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div>
+                      <small class="text-muted">Livré</small>
+                      <h3 class="mb-0">{{ livre }}</h3>
+                    </div>
+                  </div>
+                  <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="stat-card bg-danger bg-opacity-10 p-3 rounded-4">
+                  <div class="d-flex align-items-center">
+                    <div class="stat-icon bg-danger text-white rounded-circle me-3">
+                      <i class="bi bi-x-circle"></i>
+                    </div>
+                    <div>
+                      <small class="text-muted">Rejeté</small>
+                      <h3 class="mb-0">{{ rejete }}</h3>
+                    </div>
+                  </div>
+                  <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-danger" style="width: 15%"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card bg-danger text-black text-center">
-                <div class="card-body">
-                  <h5 class="card-title">Rejeté</h5>
-                  <p class="card-text">{{ rejete }}</p>
-                </div>
+
+            <!-- Graphique simple (espace réservé) -->
+            <div class="mt-4 pt-3">
+              <div class="chart-placeholder rounded-3 p-3" style="height: 200px; background-color: #f8f9fa;">
+                <p class="text-center text-muted my-5">Graphique des livraisons (intégration future)</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Section Notifications -->
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card shadow-sm mb-4">
-        <div class="card-body">
-          <h4 class="card-title">Notifications</h4>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <strong>Nouveau message :</strong> Vous avez une nouvelle tâche assignée.
-              <span class="text-muted">Il y a 2 heures</span>
-            </li>
-            <li class="list-group-item">
-              <strong>Rappel :</strong> N'oubliez pas de vérifier votre itinéraire.
-              <span class="text-muted">Hier</span>
-            </li>
-            <li class="list-group-item text-center text-muted">
-              Aucune notification supplémentaire.
-            </li>
-          </ul>
+    <!-- Section Notifications -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card border-0 shadow-lg">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="mb-0">Notifications</h4>
+              <span class="badge bg-primary rounded-pill">2 nouvelles</span>
+            </div>
+
+            <div class="notifications-list">
+              <div class="notification-item unread">
+                <div class="notification-icon bg-primary text-white">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <div class="notification-content">
+                  <h6>Nouvelle tâche assignée</h6>
+                  <p class="mb-1">Vous avez une nouvelle livraison à effectuer demain matin</p>
+                  <small class="text-muted">Il y a 2 heures</small>
+                </div>
+              </div>
+
+              <div class="notification-item unread">
+                <div class="notification-icon bg-warning text-white">
+                  <i class="bi bi-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                  <h6>Rappel important</h6>
+                  <p class="mb-1">N'oubliez pas de vérifier votre itinéraire avant départ</p>
+                  <small class="text-muted">Hier, 15:42</small>
+                </div>
+              </div>
+
+              <div class="notification-item">
+                <div class="notification-icon bg-success text-white">
+                  <i class="bi bi-check-circle"></i>
+                </div>
+                <div class="notification-content">
+                  <h6>Livraison confirmée</h6>
+                  <p class="mb-1">Votre livraison #4587 a été confirmée par le client</p>
+                  <small class="text-muted">Lundi, 10:30</small>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-link text-primary p-0 mt-3">
+              <i class="bi bi-arrow-down-circle me-1"></i> Voir toutes les notifications
+            </button>
+          </div>
         </div>
       </div>
     </div>

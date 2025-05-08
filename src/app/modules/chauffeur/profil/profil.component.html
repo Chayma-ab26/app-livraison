@@ -1,32 +1,83 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-lg border-0 rounded-3">
-        <div class="card-body p-4">
-          <h3 class="card-title text-center text-primary mb-4">Mon Profil</h3>
+<div class="profile-container">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Header du profil -->
+        <div class="profile-header text-center mb-5">
+          <h1 class="display-5 fw-bold text-gradient">Mon Profil</h1>
+          <p class="lead text-muted">Gérez vos informations personnelles</p>
+        </div>
 
-          <!-- Gestion des erreurs -->
-          <div *ngIf="errorMessage" class="alert alert-danger text-center">
-            {{ errorMessage }}
-          </div>
+        <!-- Carte principale -->
+        <div class="card profile-card border-0 shadow-lg overflow-hidden">
+          <div class="row g-0">
+            <!-- Section avatar -->
+            <div class="col-md-4 profile-avatar-section text-center py-4">
+              <div class="avatar-wrapper mx-auto mb-3">
+                <div class="avatar-circle bg-primary text-white">
+                  {{ user?.nom?.charAt(0) || 'U' }}
+                </div>
+                <button class="btn btn-sm btn-outline-primary avatar-edit-btn">
+                  <i class="bi bi-camera"></i>
+                </button>
+              </div>
+              <h4 class="mb-1">{{ user?.nom }}</h4>
+              <div class="badge bg-primary-light text-primary rounded-pill mb-3">{{ user?.role }}</div>
+              <div class="status-indicator online">En ligne</div>
+            </div>
 
-          <!-- Vérification si les données sont chargées -->
-          <div *ngIf="user; else loading" class="text-center">
-            <p class="fw-bold fs-5"><strong>Nom :</strong> {{ user.nom }}</p>
-            <p class="fw-bold fs-5"><strong>Email :</strong> {{ user.email }}</p>
-            <p class="fw-bold fs-5"><strong>Rôle :</strong> {{ user.role }}</p>
-          </div>
+            <!-- Section informations -->
+            <div class="col-md-8">
+              <div class="card-body p-4 p-lg-5">
+                <!-- Gestion des erreurs -->
+                <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+                  {{ errorMessage }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
 
-          <!-- Loader en attendant les données -->
-          <ng-template #loading>
-            <div class="text-center">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Chargement...</span>
+                <!-- Loader -->
+                <ng-template *ngIf="!user" #loading>
+                  <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Chargement...</span>
+                    </div>
+                  </div>
+                </ng-template>
+
+                <!-- Informations utilisateur -->
+                <div *ngIf="user" class="user-info">
+                  <div class="info-item">
+                    <i class="bi bi-person-circle text-primary"></i>
+                    <div>
+                      <h6>Nom complet</h6>
+                      <p>{{ user.nom }}</p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <i class="bi bi-envelope text-primary"></i>
+                    <div>
+                      <h6>Adresse email</h6>
+                      <p>{{ user.email }}</p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <i class="bi bi-person-badge text-primary"></i>
+                    <div>
+                      <h6>Rôle</h6>
+                      <p>{{ user.role }}</p>
+                    </div>
+                  </div>
+
+
+
+                </div>
               </div>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
     </div>
