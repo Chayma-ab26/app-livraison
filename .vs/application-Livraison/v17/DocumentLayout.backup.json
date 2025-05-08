@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "Controllers\\LivraisonController.cs",
               "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\LivraisonController.cs",
               "RelativeToolTip": "Controllers\\LivraisonController.cs",
-              "ViewState": "AgIAAB8BAAAAAAAAAAAmwDEBAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAACABAAAAAAAAAAAcwCsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-01T21:24:27.341Z",
               "EditorCaption": ""
@@ -63,8 +63,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAA5wB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T21:33:43.964Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T21:33:43.964Z"
             },
             {
               "$type": "Document",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "Models\\Livraison.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAgwBIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T21:34:08.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T21:34:08.273Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "Controllers\\AuthController.cs",
               "ViewState": "AgIAADIAAAAAAAAAAAAYwEkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T15:25:05.637Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T15:25:05.637Z"
             },
             {
               "$type": "Document",
