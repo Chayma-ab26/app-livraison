@@ -5,6 +5,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { authGuard } from '../../guards/auth.guard';
 import { MesLivraisonsComponent } from './mes-livraisons/mes-livraisons.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { CarteComponent } from './carte/carte.component';
 
 const routes: Routes = [
   { path: '', component: DashboardChauffeurComponent , canActivate: [authGuard]},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'chauffeur/profil/profil', component: ProfilComponent, canActivate: [authGuard] },
   { path: 'chauffeur/mes-livraisons/mes-livraisons', component: MesLivraisonsComponent, canActivate: [authGuard] },
   { path: 'chauffeur/chatbot/chatbot', component: ChatbotComponent, canActivate: [authGuard] },
+  { path: 'chauffeur/carte/carte', component: CarteComponent, canActivate: [authGuard] },
 
   { path: '**', redirectTo: '' }
 

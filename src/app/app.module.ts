@@ -8,12 +8,10 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AcceuilComponent } from './modules/home/acceuil/acceuil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent
   ],
   imports: [
     BrowserModule,

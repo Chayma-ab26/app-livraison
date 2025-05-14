@@ -63,12 +63,7 @@ export class UserService {
   getNombreChauffeurs(): Observable<{ total: number }> {
     return this.http.get<{ total: number }>(`${this.apiUrl}/count-chauffeurs`);
   }
- /* getChauffeurs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users/chauffeurs`, {
-      headers: this.getHeaders()
-    });
-  }
-*/
+
 getChauffeurs(): Observable<User[]> {
   // Ajouter l'en-tête d'autorisation avec le token JWT
   const token = localStorage.getItem('token');  // On récupère le token JWT

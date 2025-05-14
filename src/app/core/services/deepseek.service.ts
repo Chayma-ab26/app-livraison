@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 @Injectable({ providedIn: 'root' })
 export class DeepseekService {
   private readonly apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-  private readonly apiKey = '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';
+  private readonly apiKey = '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';
   private readonly weatherApiKey = '8326ff3ae9810d407f1b2d3147999189';
   private readonly routeApiKey = '5b3ce3597851110001cf62485394a7df23dd47d6911c10db19e46212';
 

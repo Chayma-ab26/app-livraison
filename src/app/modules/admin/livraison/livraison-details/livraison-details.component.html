@@ -18,14 +18,7 @@
           <p><strong>👤 Créée par :</strong> {{ livraison.admin?.nom }}</p>
           <p><strong>🚚 Chauffeur assigné :</strong> {{ livraison.chauffeur?.nom }}</p>
 
-          <!-- Optionnel -->
-          <!--
-          <div *ngIf="livraison.itineraire">
-            <h5 class="mt-4">🗺️ Itinéraire</h5>
-            <p><strong>Départ :</strong> {{ livraison.itineraire.pointDepart }}</p>
-            <p><strong>Arrivée :</strong> {{ livraison.itineraire.pointArrivee }}</p>
-          </div>
-          -->
+
 
           <div class="text-end mt-4">
             <a routerLink="/admin/livraison/list-livraison" class="btn btn-secondary">

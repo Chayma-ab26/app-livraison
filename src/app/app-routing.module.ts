@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './modules/auth/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+ // { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
   //{ path: '', redirectTo: '/home/home', pathMatch: 'full' },
-
+   { path: '',
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+  },
   { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canActivate: [authGuard] }, // ✅ Protéger Admin
   { path: 'chauffeur', loadChildren: () => import('./modules/chauffeur/chauffeur.module').then(m => m.ChauffeurModule), canActivate: [authGuard] }, // ✅ Protéger Chauffeur

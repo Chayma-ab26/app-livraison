@@ -1,4 +1,65 @@
-.container{
-  margin-left: 250px;
-max-width: 1200px;
+/* Style compact pour le formulaire de création de facture */
+.container.mt-5 {
+  margin-left: 350px;
+  padding: 1.5rem;
+  max-width: 900px; /* Largeur réduite */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+h3.text-primary {
+  color: #3a7bd5 !important;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.form-control, .form-select {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #3a7bd5;
+  box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.2);
+}
+
+.form-control[readonly] {
+  background-color: #f8fafc;
+}
+
+.btn {
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  gap: 6px;
+}
+
+.btn i {
+  font-size: 0.9rem;
+}
+
+/* Espacement réduit entre les lignes */
+.row.g-4 {
+  --bs-gutter-y: 0.8rem;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .container.mt-5 {
+    margin-left: 0;
+    padding: 1rem;
+    max-width: 100%;
+  }
 }

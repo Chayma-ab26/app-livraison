@@ -1,97 +1,383 @@
-.sidebar {
+/* admin/navbar/navbar.component.scss */
+.admin-sidebar {
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 80px;
+  --primary-color: #4361ee;
+  --primary-light: #4cc9f0;
+  --dark-color: #1a1b25;
+  --text-color: #f8f9fa;
+  --text-light: #adb5bd;
+  --transition-speed: 0.3s;
+
+  width: var(--sidebar-width);
   height: 100vh;
-  background-color: #0d6efd;
-  color: white;
-}
-
-.sidebar a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  padding: 12px;
-  transition: 0.3s;
-}
-
-.sidebar a:hover {
-  background-color: #0b5ed7;
-}
-
-.content {
-  padding: 20px;
-}
-
-/* Masquer le checkbox par défaut */
-.dropdown-toggle-checkbox {
-  display: none;
-}
-
-/* Style du bouton label (le bouton qui déclenche l'affichage) */
-.dropdown-toggle-checkbox + label {
-  cursor: pointer;
-}
-
-/* Masquer le dropdown par défaut */
-.dropdown-menu {
-  display: none;
-  padding-left: 0;
-  list-style-type: none;
-}
-
-/* Lorsque le checkbox est coché, afficher le dropdown */
-.dropdown-toggle-checkbox:checked + label + .dropdown-menu {
-  display: block;
-}
-
-/* Style personnalisé du bouton */
-.dropdown-toggle-checkbox + label {
-  cursor: pointer;
-  background-color: transparent;  /* Enlever l'arrière-plan */
-  color: white;  /* Couleur du texte (ex: noir) */
-  border: none;  /* Enlever les bordures */
-  padding: 10px;  /* Espacement intérieur du bouton */
-  font-size: 16px;  /* Taille du texte */
-  transition: all 0.3s ease;  /* Pour une transition fluide */
-
-}
-
-/* Ajouter un effet au survol */
-.dropdown-toggle-checkbox + label:hover {
-  background-color: #0b5ed7;
-
-}
-.dropdown .dropdown-item {
-  color: #0b5ed7;
- } /* Couleur du texte */
- .dropdown .dropdown-item:hover {
-  color: white;
-}
- /* La couleur du texte au survol, ici bleu */
-/* navbar.component.css */
-
-
-/* Navbar fixée en haut */
-.navbar {
+  background: var(--dark-color);
   position: fixed;
-  width: 100%;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
   z-index: 1000;
-  height: 60px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-speed) ease;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  &:hover {
+    .menu-title, .section-label, .profile-info, .logout-item span {
+      opacity: 1;
+      transition-delay: 0.1s;
+    }
+  }
 }
 
-/* Sidebar fixée à gauche */
-.sidebar {
-  height: 100vh;
-  position: fixed;
-  top: 10px; /* Pour éviter de chevaucher la navbar */
+.sidebar-header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--primary-light);
+  }
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  transition: all var(--transition-speed) ease;
+
+  span {
+    color: var(--primary-light);
+  }
+}
+
+.sidebar-toggle {
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+
+  &:hover {
+    color: var(--primary-light);
+  }
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.menu-section {
+  padding: 0 1.5rem 1rem;
+
+  &:not(:first-child) {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+.section-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
+
+    .menu-icon {
+      transform: scale(1.1);
+    }
+
+    .hover-effect {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    color: var(--text-color);
+    background: linear-gradient(90deg, rgba(67, 97, 238, 0.2) 0%, rgba(67, 97, 238, 0) 100%);
+
+    .menu-icon {
+      color: var(--primary-light);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--primary-light);
+    }
+  }
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  transition: all var(--transition-speed) ease;
+
+  i {
+    font-size: 1.1rem;
+  }
+}
+
+.menu-title {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+}
+
+.hover-effect {
+  position: absolute;
+  top: 0;
   left: 0;
-  width: 250px; /* Largeur fixe */
-  background-color: #0d6efd;
-  color: white;
-  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0) 100%);
+  opacity: 0;
+  transition: all var(--transition-speed) ease;
 }
 
-/*---------*/
+.accordion-menu {
+  .accordion-toggle {
+    display: none;
 
+    &:checked {
+      + label {
+        .accordion-arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      ~ .submenu {
+        max-height: 500px;
+        opacity: 1;
+        padding: 0.5rem 0 0.5rem 3.5rem;
+      }
+    }
+  }
+
+  .submenu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all var(--transition-speed) ease;
+  }
+}
+
+.submenu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all var(--transition-speed) ease;
+
+  &:hover {
+    color: var(--text-color);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary-light);
+    }
+  }
+
+  &.active {
+    color: var(--primary-light);
+
+    .active-dot {
+      opacity: 1;
+    }
+  }
+}
+
+.active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  margin-left: auto;
+  opacity: 0;
+  transition: all var(--transition-speed) ease;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 0.75rem;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+
+  .name {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  .role {
+    font-size: 0.7rem;
+    color: var(--text-light);
+  }
+}
+
+.logout-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all var(--transition-speed) ease;
+
+  i {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  span {
+    font-size: 0.9rem;
+    transition: all var(--transition-speed) ease;
+  }
+
+  &:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+  }
+}
+
+/* Collapsed state */
+.admin-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+
+  .logo-text,
+  .menu-title,
+  .section-label,
+  .profile-info,
+  .logout-item span,
+  .accordion-arrow {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .sidebar-header {
+    justify-content: center;
+  }
+
+  .menu-item {
+    justify-content: center;
+    padding: 0.75rem;
+
+    .menu-icon {
+      margin-right: 0;
+    }
+  }
+
+  .accordion-toggle:checked ~ .submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 200px;
+    background: var(--dark-color);
+    border-radius: 0 6px 6px 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem !important;
+    z-index: 1000;
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}

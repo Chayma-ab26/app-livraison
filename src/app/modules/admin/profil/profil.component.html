@@ -1,44 +1,68 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow border-0 rounded-4">
-        <div class="card-body p-4 text-center bg-light">
-
-          <h3 class="card-title text-dark fw-bold mb-3">Mon Profil</h3>
-
-          <!-- Gestion des erreurs -->
-          <div *ngIf="errorMessage" class="alert alert-danger text-center">
-            {{ errorMessage }}
+<div class="profile-page">
+  <div class="profile-container">
+    <div class="profile-card">
+      <!-- En-tête avec avatar -->
+      <div class="profile-header">
+        <div class="avatar-container">
+          <div class="avatar-circle">
+            <i class="bi bi-person"></i>
           </div>
-
-          <!-- Informations utilisateur -->
-          <div *ngIf="user; else loading">
-            <p class="fw-bold fs-5 text-secondary">
-              <i class="bi bi-person-fill text-primary"></i>
-              <strong>Nom :</strong> {{ user.nom }}
-            </p>
-            <p class="fw-bold fs-5 text-secondary">
-              <i class="bi bi-envelope-fill text-primary"></i>
-              <strong>Email :</strong> {{ user.email }}
-            </p>
-            <p class="fw-bold fs-5 text-secondary">
-              <i class="bi bi-shield-lock-fill text-primary"></i>
-              <strong>Rôle :</strong> {{ user.role }}
-            </p>
-          </div>
-
-          <!-- Loader en attendant les données -->
-          <ng-template #loading>
-            <div class="text-center">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Chargement...</span>
-              </div>
-            </div>
-          </ng-template>
-
         </div>
+      </div>
+
+      <!-- Corps de la carte -->
+      <div class="profile-content">
+        <h2 class="profile-name">{{ user?.nom || 'Mon Profil' }}</h2>
+        <p class="profile-role">{{ user?.role }}</p>
+
+        <!-- Gestion des erreurs -->
+        <div *ngIf="errorMessage" class="alert-message">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <!-- Informations utilisateur -->
+        <div *ngIf="user; else loading" class="info-grid">
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="bi bi-person-badge"></i>
+            </div>
+            <div class="info-text">
+              <h4>Identité</h4>
+              <p>{{ user.nom }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <div class="info-text">
+              <h4>Email</h4>
+              <p>{{ user.email }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="info-text">
+              <h4>Rôle</h4>
+              <p>{{ user.role }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loader -->
+        <ng-template #loading>
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Chargement du profil...</p>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

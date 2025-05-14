@@ -9,6 +9,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { MesLivraisonsComponent } from './mes-livraisons/mes-livraisons.component';
 import { FormsModule } from '@angular/forms';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { StatusFilterPipe } from '../../pipes/status-filter.pipe';
+import { CarteComponent } from './carte/carte.component';
 
 
 @NgModule({
@@ -17,13 +19,18 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     NavbarComponent,
     ProfilComponent,
     MesLivraisonsComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    CarteComponent,
+   StatusFilterPipe,
+
   ],
   imports: [
     CommonModule,
     ChauffeurRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
+
   ]
 })
 export class ChauffeurModule { }

@@ -2,81 +2,106 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Livraison } from '../../../models/livraison';
-import { LivraisonService } from '../../../core/services/livraison.service';
-
+import { NotificationService } from '../../../core/services/notification.service';
+import { Notification } from '../../../models/notification';import { LivraisonService } from '../../../core/services/livraison.service';
+{}
 @Component({
   selector: 'app-dashboard-chauffeur',
-  standalone: false,
   templateUrl: './dashboard-chauffeur.component.html',
-  styleUrl: './dashboard-chauffeur.component.css'
+  styleUrls: ['./dashboard-chauffeur.component.css'],
+  standalone:false
 })
 export class DashboardChauffeurComponent implements OnInit {
   user: User | null = null;
-  errorMessage: string | null = null;
   livraisons: Livraison[] = [];
-l: any;
-enCours: number = 0;
-livre: number = 0;
-rejete: number = 0;
-  constructor(private http: HttpClient,private livraisonservive: LivraisonService) {}
+  notifications: Notification[] = [];
+  enCours: number = 0;
+  livre: number = 0;
+  rejete: number = 0;
+  unreadCount: number = 0;
+  loadingNotifications = false;
+
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService,private livraisonservice :LivraisonService
+  ) {}
 
   ngOnInit(): void {
-    this.GetProfile();
-    this.GetLivraisons();
+    this.getProfile();
+    this.getLivraisons();
+    this.getNotifications();
+
   }
 
-  GetProfile(): void {
-    const token = localStorage.getItem('token'); // Récupérer le token
 
-    if (!token) {
-      console.error("Token introuvable, redirection vers login...");
-      return;
-    }
+ getNotifications(): void {
+  this.loadingNotifications = true;
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    this.http.get<User>('https://localhost:7009/api/User/profile', { headers })
-      .subscribe(
-        (data) => {
-          console.log('Données du profil:', data);
-          this.user = data;
-        },
-        (error) => {
-          console.error('Erreur lors du chargement du profil', error);
-          if (error.status === 401) {
-            console.warn('Utilisateur non authentifié, redirection vers login');
-            window.location.href = '/login'; // Rediriger si non authentifié
-          }
-        }
-      );
-}
-GetLivraisons(): void {
-  const token = localStorage.getItem('token'); // Récupérer le token
-
-  if (!token) {
-    console.error("Token introuvable, redirection vers login...");
-    return;
-  }
+  const token = localStorage.getItem('token');
+  if (!token) return;
 
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  this.http.get<any[]>('https://localhost:7009/api/Livraison', { headers })
-    .subscribe(
-      (data) => {
-        console.log('Livraisons:', data);
-        this.livraisons = data;
-        this.calculateLivraisonStats();
-      },
-      (error) => {
-        console.error('Erreur lors du chargement des livraisons', error);
-      }
-    );
+  this.http.get<User>('https://localhost:7009/api/User/profile', { headers }).subscribe({
+    next: (user) => {
+      this.user = user;
+      const chauffeurId = user.id;
+
+     this.notificationService.getNotificationsByChauffeurId(chauffeurId!).subscribe({
+  next: (data) => {
+    this.notifications = data;
+    this.unreadCount = data.length;
+    this.loadingNotifications = false;
+  },
+  error: (error) => {
+    console.error('Erreur lors du chargement des notifications :', error);
+    this.loadingNotifications = false;
+  }
+});
+
+    },
+    error: (err) => {
+      console.error('Erreur lors de la récupération du profil pour les notifications :', err);
+      this.loadingNotifications = false;
+    }
+  });
 }
 
-// Méthode pour calculer les statistiques des livraisons
-calculateLivraisonStats(): void {
-  this.enCours = this.livraisons.filter(livraison => livraison.statut === 'Encours').length;
-  this.livre = this.livraisons.filter(livraison => livraison.statut === 'Livrée').length;
-  this.rejete = this.livraisons.filter(livraison => livraison.statut === 'Annulée').length;
-}
+
+  getProfile(): void {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.get<User>('https://localhost:7009/api/User/profile', { headers }).subscribe({
+      next: (user) => this.user = user,
+      error: (err) => {
+        console.error('Erreur profil:', err);
+        if (err.status === 401) window.location.href = '/login';
+      }
+    });
+  }
+
+  getLivraisons(): void {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.get<Livraison[]>('https://localhost:7009/api/Livraison/mes-livraisons', { headers }).subscribe({
+      next: (livraisons) => {
+        this.livraisons = livraisons;
+        this.calculateStats();
+      },
+      error: (err) => console.error('Erreur livraisons:', err)
+    });
+  }
+
+  calculateStats(): void {
+    this.enCours = this.livraisons.filter(l => l.statut === 'Encours').length;
+    this.livre = this.livraisons.filter(l => l.statut === 'Livrée').length;
+    this.rejete = this.livraisons.filter(l => l.statut === 'Annulée').length;
+  }
+
+
+
 }

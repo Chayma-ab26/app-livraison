@@ -1,0 +1,122 @@
+/* Style modernisé pour la page de détails */
+.container.mt-5 {
+  padding: 2rem;
+  margin-left: 250px;
+  min-height: calc(100vh - 120px);
+  background-color: #f8fafc;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  padding: 1.5rem;
+  border-bottom: none;
+}
+
+.card-header h4 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  padding: 2rem;
+  background-color: white;
+}
+
+.card-body p {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-body p strong {
+  min-width: 180px;
+  color: #4a5568;
+}
+
+.card-body hr {
+  margin: 1.5rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+  color: white !important;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-end {
+  margin-top: 2rem;
+}
+
+/* Icônes dans le texte */
+.card-body p strong::before {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .container.mt-5 {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .card-body p {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .card-body p strong {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-header h4 {
+    font-size: 1.3rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+}

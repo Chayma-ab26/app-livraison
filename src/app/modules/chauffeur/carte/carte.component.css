@@ -1,0 +1,24 @@
+#map {
+    height: 100vh; /* Pleine hauteur de l'écran */
+    width: 100%;   /* Pleine largeur de l'écran */
+}
+/*5b3ce3597851110001cf624859fc5e8cac3b41bf92c67ee3e26a10da*/
+
+.form-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 10px;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.form-container label,
+.form-container select,
+.form-container button {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}

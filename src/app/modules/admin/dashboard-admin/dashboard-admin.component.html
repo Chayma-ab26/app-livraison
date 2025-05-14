@@ -1,66 +1,73 @@
 <app-navbar></app-navbar>
+<div class="dashboard-container">
+  <main class="dashboard-content">
+    <header class="dashboard-header">
+      <h1 class="dashboard-title">DELIVERYPRO <span class="welcome-icon">👋</span></h1>
+      <p class="dashboard-subtitle">Dashboard Admin</p>
+    </header>
 
-<div class="container-fluid">
-  <div class="row">
-    <main class="col-md-10 px-md-4 content">
-      <h3 class="fw-bold mb-4">Bienvenue sur le Dashboard Admin 👋</h3>
-
-      <div class="row">
-        <!-- Chauffeurs -->
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h5 class="card-title">📊 Chauffeurs</h5>
-              <p class="card-text">Nombre de chauffeurs : {{ nbChauffeurs }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Courses -->
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h5 class="card-title">🚗 Courses</h5>
-              <p class="card-text">Total du mois : {{ totalCourses }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Revenus -->
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h5 class="card-title">💰 Revenus</h5>
-              <p class="card-text">€{{ totalRevenus }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Factures -->
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h5 class="card-title">📄 Factures</h5>
-              <p class="card-text">
-                Payées : {{ nbFacturesPayees }} |
-                Impayées : {{ nbFacturesImpayees }}
-              </p>
-            </div>
-          </div>
+    <div class="compact-grid">
+      <!-- Chauffeurs -->
+      <div class="compact-card driver-stat">
+        <div class="card-icon">🚗</div>
+        <div class="card-content">
+          <h3 class="card-title">Chauffeurs</h3>
+          <p class="card-value">{{ nbChauffeurs }}</p>
+          <p class="card-description">Actifs</p>
         </div>
       </div>
 
-      <!-- Graphique des revenus -->
-      <div class="row mt-4">
-        <div class="col-md-12">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h5 class="card-title">📈 Revenus des 6 derniers mois</h5>
-              <canvas id="revenusChart"></canvas>
-            </div>
-          </div>
+      <!-- Courses -->
+      <div class="compact-card ride-stat">
+        <div class="card-icon">📄</div>
+        <div class="card-content">
+          <h3 class="card-title">Factures</h3>
+          <p class="card-value">{{ nbFactures }}</p>
+          <p class="card-description">Ce mois</p>
         </div>
       </div>
-    </main>
-  </div>
+
+      <!-- Revenus -->
+      <div class="compact-card revenue-stat">
+        <div class="card-icon">💰</div>
+        <div class="card-content">
+          <h3 class="card-title">Revenus</h3>
+          <p class="card-value">{{ totalPrixLivraison | currency:'EUR':'symbol':'1.0-0' }}</p>
+          <p class="card-description">Total</p>
+        </div>
+      </div>
+       <!-- ✅ Nouveau : Taux de livraison -->
+      <div class="compact-card delivery-rate-stat">
+        <div class="card-icon">📈</div>
+        <div class="card-content">
+          <h3 class="card-title">Taux de livraison</h3>
+          <p class="card-value">{{ tauxLivraison | number:'1.0-0' }}%</p>
+          <p class="card-description">Basé sur livrées/annulées</p>
+        </div>
+      </div>
+
+      <!-- Livraison livrée -->
+      <div class="compact-card invoice-stat">
+        <div class="card-icon">📊</div>
+        <div class="card-content">
+          <h3 class="card-title">Livraison</h3>
+          <p class="card-value">{{ livre }}</p>
+          <p class="card-description">Livré</p>
+        </div>
+      </div>
+
+      <!-- Livraison annulée -->
+      <div class="compact-card unpaid-stat">
+        <div class="card-icon">⚠️</div>
+        <div class="card-content">
+          <h3 class="card-title">Livraison</h3>
+          <p class="card-value">{{ rejete }}</p>
+          <p class="card-description">Annulé</p>
+        </div>
+      </div>
+
+
+    </div>
+  </main>
 </div>
+

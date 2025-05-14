@@ -58,11 +58,7 @@ export class FactureService {
       headers: this.getHeaders(),
     });
   }
-  /*exportPdf(id: number): Observable<Blob> {
-    return this.http.get(`https://localhost:7009/api/factures/${id}/export`, {
-      responseType: 'blob'
-    });
-  }*/
+
 
   deleteFacture(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, {
@@ -76,4 +72,10 @@ export class FactureService {
       responseType: 'blob',
     });
   }
+ getNombrefacture(): Observable<{ total: number }> {
+  return this.http.get<{ total: number }>(`${this.apiUrl}/count-factures`, {
+    headers: this.getHeaders()
+  });
+}
+
 }

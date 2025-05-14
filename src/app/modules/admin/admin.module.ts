@@ -15,7 +15,6 @@ import { LivraisonDetailsComponent } from './livraison/livraison-details/livrais
 import { ListFactureComponent } from './facture/list-facture/list-facture.component';
 import { AddFactureComponent } from './facture/add-facture/add-facture.component';
 
-
 @NgModule({
   declarations: [
     DashboardAdminComponent,
@@ -34,7 +33,7 @@ import { AddFactureComponent } from './facture/add-facture/add-facture.component
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
 
   ]

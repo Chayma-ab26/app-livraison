@@ -1,44 +1,114 @@
 <!-- admin/navbar/navbar.component.html -->
-<nav class="col-md-3 col-lg-2 d-md-block sidebar py-4">
-  <h5 class="text-center mb-4">Admin Panel</h5>
-  <a routerLink="/admin">🏠 Dashboard</a>
-
-  <!-- Dropdown Utilisateurs -->
-  <div class="dropdown">
-    <input type="checkbox" id="dropdownToggleUsers" class="dropdown-toggle-checkbox" />
-    <label for="dropdownToggleUsers" class="btn btn-secondary dropdown-toggle w-100 text-start">
-      👥 Utilisateurs
-    </label>
-    <ul class="dropdown-menu w-100">
-      <li><a class="dropdown-item" routerLink="/admin/users/user-list">📋 Liste des utilisateurs</a></li>
-      <li><a class="dropdown-item" routerLink="/admin/users/user-add">➕ Ajouter un utilisateur</a></li>
-    </ul>
+<nav class="admin-sidebar">
+  <div class="sidebar-header">
+    <div class="brand">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3l-9 4v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-4zm0 15c-3.75 0-7-2-8-5.5V8l8 3.5 8-3.5v4.5c-1 3.5-4.25 5.5-8 5.5z"/>
+        </svg>
+      </div>
+      <h1 class="logo-text">DELIVERY<span>PRO</span></h1>
+    </div>
+    <div class="sidebar-toggle">
+      <i class="bi bi-chevron-double-left"></i>
+    </div>
   </div>
 
-  <!-- Dropdown Livraison -->
-  <div class="dropdown">
-    <input type="checkbox" id="dropdownToggleLivraison" class="dropdown-toggle-checkbox" />
-    <label for="dropdownToggleLivraison" class="btn btn-secondary dropdown-toggle w-100 text-start">
-      🚚 Livraison
-    </label>
-    <ul class="dropdown-menu w-100">
-      <li><a class="dropdown-item" routerLink="/admin/livraison/list-livraison">📋 Liste des Livraisons</a></li>
-      <li><a class="dropdown-item" routerLink="/admin/livraison/add-livraison">➕ Ajouter une Livraison</a></li>
-    </ul>
+  <div class="sidebar-menu">
+    <div class="menu-section">
+      <span class="section-label">NAVIGATION</span>
+
+      <a routerLink="/admin" class="menu-item" routerLinkActive="active">
+        <div class="menu-icon">
+          <i class="bi bi-speedometer2"></i>
+        </div>
+        <span class="menu-title">Dashboard</span>
+        <div class="hover-effect"></div>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <span class="section-label">MANAGEMENT</span>
+
+      <div class="accordion-menu">
+        <input type="checkbox" id="users-accordion" class="accordion-toggle">
+        <label for="users-accordion" class="menu-item">
+          <div class="menu-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <span class="menu-title">Utilisateurs</span>
+          <i class="bi bi-chevron-down accordion-arrow"></i>
+          <div class="hover-effect"></div>
+        </label>
+        <div class="submenu">
+          <a routerLink="/admin/users/user-list" class="submenu-item" routerLinkActive="active">
+            <span>Liste des utilisateurs</span>
+            <div class="active-dot"></div>
+          </a>
+          <a routerLink="/admin/users/user-add" class="submenu-item" routerLinkActive="active">
+            <span>Ajouter un utilisateur</span>
+            <div class="active-dot"></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="accordion-menu">
+        <input type="checkbox" id="delivery-accordion" class="accordion-toggle">
+        <label for="delivery-accordion" class="menu-item">
+          <div class="menu-icon">
+            <i class="bi bi-truck"></i>
+          </div>
+          <span class="menu-title">Livraisons</span>
+          <i class="bi bi-chevron-down accordion-arrow"></i>
+          <div class="hover-effect"></div>
+        </label>
+        <div class="submenu">
+          <a routerLink="/admin/livraison/list-livraison" class="submenu-item" routerLinkActive="active">
+            <span>Liste des livraisons</span>
+            <div class="active-dot"></div>
+          </a>
+          <a routerLink="/admin/livraison/add-livraison" class="submenu-item" routerLinkActive="active">
+            <span>Ajouter une livraison</span>
+            <div class="active-dot"></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="accordion-menu">
+        <input type="checkbox" id="invoice-accordion" class="accordion-toggle">
+        <label for="invoice-accordion" class="menu-item">
+          <div class="menu-icon">
+            <i class="bi bi-file-earmark-text"></i>
+          </div>
+          <span class="menu-title">Factures</span>
+          <i class="bi bi-chevron-down accordion-arrow"></i>
+          <div class="hover-effect"></div>
+        </label>
+        <div class="submenu">
+          <a routerLink="/admin/facture/list-facture" class="submenu-item" routerLinkActive="active">
+            <span>Liste des factures</span>
+            <div class="active-dot"></div>
+          </a>
+          <a routerLink="/admin/facture/add-facture" class="submenu-item" routerLinkActive="active">
+            <span>Ajouter une facture</span>
+            <div class="active-dot"></div>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- ✅ Nouveau Dropdown Facture -->
-  <div class="dropdown">
-    <input type="checkbox" id="dropdownToggleFacture" class="dropdown-toggle-checkbox" />
-    <label for="dropdownToggleFacture" class="btn btn-secondary dropdown-toggle w-100 text-start">
-      🧾 Factures
-    </label>
-    <ul class="dropdown-menu w-100">
-      <li><a class="dropdown-item" routerLink="/admin/facture/list-facture">📋 Liste des factures</a></li>
-      <li><a class="dropdown-item" routerLink="/admin/facture/add-facture">➕ Ajouter une facture</a></li>
-    </ul>
+  <div class="sidebar-footer">
+    <a routerLink="/admin/profil/profil" class="profile-item">
+      <div class="avatar">AD</div>
+      <div class="profile-info">
+        <span class="name">Admin User</span>
+        <span class="role">Administrateur</span>
+      </div>
+    </a>
+    <a routerLink="/home" class="logout-item">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Déconnexion</span>
+    </a>
   </div>
-
-  <a routerLink="/admin/profil/profil" class="mt-3">🙍‍♂️ Mon Profil</a>
-  <a routerLink="/login" class="mt-4 text-danger">🔓 Déconnexion</a>
 </nav>

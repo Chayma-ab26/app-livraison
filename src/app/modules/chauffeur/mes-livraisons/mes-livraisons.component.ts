@@ -11,7 +11,7 @@ import { LivraisonService } from '../../../core/services/livraison.service';
 
 export class MesLivraisonsComponent implements OnInit {
   livraisons: Livraison[] = [];
-
+    selectedStatus: string = 'Tous les statuts';
   constructor(private livraisonService: LivraisonService) {}
 
   ngOnInit(): void {

@@ -1,15 +1,15 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
-  <div class="card shadow-lg p-4 rounded-4 border-0" style="max-width: 400px; width: 100%;">
+<div class="login-wrapper bg-light">
+  <div class="login-card shadow-lg">
     <div class="text-center mb-4">
-      <h3 class="fw-bold text-primary">Bienvenue 👋</h3>
-      <p class="text-muted mb-0">Connectez-vous à votre compte</p>
+      <h3 class="fw-bold text-primary mb-1">Bienvenue 👋</h3>
+      <p class="text-muted">Connectez-vous à votre compte</p>
     </div>
 
     <form (ngSubmit)="login()" #loginForm="ngForm">
-      <div class="form-group mb-3">
+      <div class="mb-3">
         <label for="email" class="form-label fw-semibold">Adresse email</label>
-        <div class="input-group">
-          <span class="input-group-text bg-white border-end-0">
+        <div class="input-group has-validation">
+          <span class="input-group-text bg-white">
             <i class="bi bi-envelope-fill text-primary"></i>
           </span>
           <input
@@ -17,17 +17,19 @@
             id="email"
             name="email"
             [(ngModel)]="email"
-            class="form-control border-start-0"
+            class="form-control"
             placeholder="ex: nom@domaine.com"
             required
+            email
           />
+          <div class="invalid-feedback">Veuillez entrer une adresse email valide</div>
         </div>
       </div>
 
-      <div class="form-group mb-3">
+      <div class="mb-3">
         <label for="password" class="form-label fw-semibold">Mot de passe</label>
-        <div class="input-group">
-          <span class="input-group-text bg-white border-end-0">
+        <div class="input-group has-validation">
+          <span class="input-group-text bg-white">
             <i class="bi bi-lock-fill text-primary"></i>
           </span>
           <input
@@ -35,24 +37,30 @@
             id="password"
             name="password"
             [(ngModel)]="password"
-            class="form-control border-start-0"
+            class="form-control"
             placeholder="••••••••"
             required
           />
+          <div class="invalid-feedback">Veuillez entrer votre mot de passe</div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary w-100 fw-semibold shadow-sm">
-        <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
+      <button
+        type="submit"
+        class="btn btn-primary w-100 py-2 fw-semibold mb-3"
+        [disabled]="loginForm.invalid"
+      >
+        <i class="bi bi-box-arrow-in-right me-2"></i> Connexion
       </button>
+
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+
+      <div class="text-center mt-3">
+
+      </div>
     </form>
-
-    <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
-      {{ errorMessage }}
-    </div>
-
-    <div class="text-center mt-4">
-      <small class="text-muted">Mot de passe oublié ? <a href="#" class="text-decoration-none">Réinitialiser</a></small>
-    </div>
   </div>
 </div>

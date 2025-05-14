@@ -1,7 +1,20 @@
 <app-navbar></app-navbar>
+<app-chatbot></app-chatbot>
 
 <div class="dashboard-container">
+  <!-- Toast Notification -->
+  <div id="notif-toast" class="toast align-items-center text-danger border-0 position-fixed top-0 end-0 m-4 shadow" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 1055; min-width: 320px; background-color: #ffe5e5;">
+    <div class="d-flex">
+      <div class="toast-body d-flex align-items-center">
+        <i class="bi bi-bell-fill fs-5 me-2 text-danger"></i>
+        <strong>Livraison bien assignée</strong>
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+
   <div class="container-fluid py-4">
+
     <!-- Header avec bienvenue -->
     <div class="row mb-4">
       <div class="col-12">
@@ -36,8 +49,6 @@
                 </div>
               </div>
 
-
-
               <div class="detail-item mt-3">
                 <i class="bi bi-check-circle"></i>
                 <div>
@@ -47,9 +58,6 @@
               </div>
             </div>
 
-            <button class="btn btn-outline-primary w-100 mt-4 rounded-pill">
-              <i class="bi bi-pencil-square me-2"></i>Éditer le profil
-            </button>
           </div>
         </div>
       </div>
@@ -60,11 +68,6 @@
           <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
               <h4 class="mb-0">Statistiques des Livraisons</h4>
-              <select class="form-select form-select-sm w-auto">
-                <option>Cette semaine</option>
-                <option>Ce mois</option>
-                <option selected>Cette année</option>
-              </select>
             </div>
 
             <div class="row g-3">
@@ -123,65 +126,41 @@
             <!-- Graphique simple (espace réservé) -->
             <div class="mt-4 pt-3">
               <div class="chart-placeholder rounded-3 p-3" style="height: 200px; background-color: #f8f9fa;">
-                <p class="text-center text-muted my-5">Graphique des livraisons (intégration future)</p>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
 
     <!-- Section Notifications -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <div class="card border-0 shadow-lg">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="mb-0">Notifications</h4>
-              <span class="badge bg-primary rounded-pill">2 nouvelles</span>
-            </div>
-
-            <div class="notifications-list">
-              <div class="notification-item unread">
-                <div class="notification-icon bg-primary text-white">
-                  <i class="bi bi-envelope"></i>
-                </div>
-                <div class="notification-content">
-                  <h6>Nouvelle tâche assignée</h6>
-                  <p class="mb-1">Vous avez une nouvelle livraison à effectuer demain matin</p>
-                  <small class="text-muted">Il y a 2 heures</small>
-                </div>
-              </div>
-
-              <div class="notification-item unread">
-                <div class="notification-icon bg-warning text-white">
-                  <i class="bi bi-exclamation-triangle"></i>
-                </div>
-                <div class="notification-content">
-                  <h6>Rappel important</h6>
-                  <p class="mb-1">N'oubliez pas de vérifier votre itinéraire avant départ</p>
-                  <small class="text-muted">Hier, 15:42</small>
-                </div>
-              </div>
-
-              <div class="notification-item">
-                <div class="notification-icon bg-success text-white">
-                  <i class="bi bi-check-circle"></i>
-                </div>
-                <div class="notification-content">
-                  <h6>Livraison confirmée</h6>
-                  <p class="mb-1">Votre livraison #4587 a été confirmée par le client</p>
-                  <small class="text-muted">Lundi, 10:30</small>
-                </div>
-              </div>
-            </div>
-
-            <button class="btn btn-link text-primary p-0 mt-3">
-              <i class="bi bi-arrow-down-circle me-1"></i> Voir toutes les notifications
-            </button>
-          </div>
-        </div>
+   <div class="notifications-list mt-5">
+  <div *ngIf="notifications.length === 0">
+    <div class="notification-item unread">
+      <div class="notification-icon bg-secondary text-white">
+        <i class="bi bi-bell"></i>
+      </div>
+      <div class="notification-content">
+        <span class="badge bg-danger ms-2"><i class="bi bi-exclamation-circle-fill"></i></span>
+        <h6>Notification <span class="badge bg-danger ms-2">Nouveau</span></h6>
+        <p class="mb-1">Vous avez une nouvelle livraison réassignée</p>
+        <small class="text-muted"></small>
       </div>
     </div>
+  </div>
+
+  <div *ngFor="let notif of notifications" class="notification-item" [class.unread]="">
+    <div class="notification-icon bg-secondary text-white">
+      <i class="bi bi-bell-fill"></i>
+    </div>
+    <div class="notification-content">
+      <h6>Notification <span  class="badge bg-danger ms-2">Nouveau</span></h6>
+      <p class="mb-1">{{ notif.message }}</p>
+      <small class="text-muted">{{ notif.sentAt | date:'short' }}</small>
+    </div>
+  </div>
+</div>
+
   </div>
 </div>

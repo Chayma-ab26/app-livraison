@@ -1,0 +1,249 @@
+<!--<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application de Livraison</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte Tunisie - Itinéraires optimisés</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <style>
+    select, button { margin: 5px; padding: 5px; }
+    #container { display: flex; margin-top: 20px; }
+    #map { height: 600px; flex: 2; }
+    #sidebar { flex: 1; padding: 0 20px; }
+    .route-info { margin: 10px 0; padding: 10px; border-radius: 5px; }
+    .legend-color { display: inline-block; width: 20px; height: 20px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+
+<h3>Point de départ</h3>
+<select id="regionSelect"><option value="">-- Région --</option></select>
+<select id="delegationSelect"><option value="">-- Délégation --</option></select>
+<select id="localiteSelect"><option value="">-- Localité --</option></select>
+
+<h3>Point d'arrivée</h3>
+<select id="regionSelectArrivee"><option value="">-- Région --</option></select>
+<select id="delegationSelectArrivee"><option value="">-- Délégation --</option></select>
+<select id="localiteSelectArrivee"><option value="">-- Localité --</option></select>
+
+<button id="showRouteBtn">Afficher les itinéraires</button>
+
+<div id="container">
+  <div id="map"></div>
+  <div id="sidebar">
+    <h3>Comparaison des distances</h3>
+    <div id="routes-info"></div>
+    <div id="legend">
+      <h4>Légende</h4>
+      <div><span class="legend-color" style="background: #3388ff;"></span>Route optimale</div>
+      <div><span class="legend-color" style="background: #666;"></span>Routes alternatives</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script>
+let data = {};
+let map;
+let routeControl;
+let currentRoutes = [];
+
+// Initialisation de la carte
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("tunisie.json")
+    .then(res => res.json())
+    .then(json => {
+      data = json;
+      initMap();
+      loadRegions();
+    })
+    .catch(error => {
+      console.error('Erreur de chargement du fichier JSON :', error);
+    });
+});
+
+function initMap() {
+  map = L.map('map').setView([36.8, 10.2], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+}
+
+function loadRegions() {
+  const regions = Object.keys(data);
+  const regionSelects = document.querySelectorAll('[id^="regionSelect"]');
+
+  regionSelects.forEach(select => {
+    regions.forEach(region => {
+      const option = document.createElement("option");
+      option.value = region;
+      option.textContent = region;
+      select.appendChild(option);
+    });
+
+    select.addEventListener("change", (e) => {
+      const type = e.target.id.includes('Arrivee') ? 'arrivee' : 'depart';
+      loadDelegations(type);
+    });
+  });
+}
+
+function loadDelegations(type) {
+  const region = document.getElementById(`regionSelect${type === 'arrivee' ? 'Arrivee' : ''}`).value;
+  const delegationSelect = document.getElementById(`${type === 'depart' ? 'delegationSelect' : 'delegationSelectArrivee'}`);
+
+  delegationSelect.innerHTML = '<option value="">-- Délégation --</option>';
+  if (region) {
+    const delegations = [...new Set(data[region].map(item => item.delegation))];
+    delegations.forEach(deleg => {
+      const option = document.createElement("option");
+      option.value = deleg;
+      option.textContent = deleg;
+      delegationSelect.appendChild(option);
+    });
+
+    delegationSelect.addEventListener("change", () => {
+      loadLocalites(region, delegationSelect.value, type);
+    });
+  }
+}
+
+function loadLocalites(region, delegation, type) {
+  const localiteSelect = document.getElementById(`${type === 'depart' ? 'localiteSelect' : 'localiteSelectArrivee'}`);
+  localiteSelect.innerHTML = '<option value="">-- Localité --</option>';
+
+  const localites = data[region].filter(item => item.delegation === delegation);
+  localites.forEach(loc => {
+    const option = document.createElement("option");
+    option.value = loc.localite;
+    option.textContent = loc.localite;
+    localiteSelect.appendChild(option);
+  });
+}
+
+document.getElementById("showRouteBtn").addEventListener("click", async () => {
+  const departure = getSelectedLocation("depart");
+  const arrival = getSelectedLocation("arrivee");
+
+  if (!validateSelection(departure, arrival)) return;
+
+  clearPreviousRoutes();
+
+  try {
+    const routes = await calculateRoutes(departure, arrival);
+    processRoutes(routes);
+  } catch (error) {
+    console.error('Erreur de calcul des itinéraires :', error);
+  }
+});
+
+function validateSelection(departure, arrival) {
+  if (!departure || !arrival) {
+    alert("Veuillez sélectionner tous les champs.");
+    return false;
+  }
+  if (!departure.latitude || !departure.longitude || !arrival.latitude || !arrival.longitude) {
+    alert("Coordonnées GPS manquantes pour une des localités sélectionnées.");
+    return false;
+  }
+  return true;
+}
+
+function clearPreviousRoutes() {
+  if (routeControl) {
+    map.removeControl(routeControl);
+    currentRoutes = [];
+    document.getElementById('routes-info').innerHTML = '';
+  }
+}
+
+async function calculateRoutes(departure, arrival) {
+  return new Promise((resolve, reject) => {
+    routeControl = L.Routing.control({
+      router: L.Routing.osrmv1({
+        serviceUrl: 'https://router.project-osrm.org/route/v1',
+        profile: 'driving',
+        alternatives: true
+      }),
+      waypoints: [
+        L.latLng(departure.latitude, departure.longitude),
+        L.latLng(arrival.latitude, arrival.longitude)
+      ],
+      routeWhileDragging: true,
+      showAlternatives: true,
+      formatter: new L.Routing.Formatter({language: 'fr'})
+    }).addTo(map);
+
+    routeControl.on('routesfound', function(e) {
+      resolve(e.routes);
+    });
+
+    routeControl.on('routingerror', function(e) {
+      reject(e.error);
+    });
+  });
+}
+
+function processRoutes(routes) {
+  const shortestRoute = routes.reduce((prev, current) =>
+    (prev.summary.totalDistance < current.summary.totalDistance) ? prev : current
+  );
+
+  routes.forEach((route, index) => {
+    const isShortest = route === shortestRoute;
+    routeControl._lines[index].setStyle({
+      color: isShortest ? '#3388ff' : '#666',
+      weight: isShortest ? 6 : 4
+    });
+  });
+
+  displayRoutesInfo(routes, shortestRoute);
+}
+
+function displayRoutesInfo(routes, shortestRoute) {
+  const routesInfo = document.getElementById('routes-info');
+  routesInfo.innerHTML = routes.map((route, index) => {
+    const distance = (route.summary.totalDistance / 1000).toFixed(1);
+    const isShortest = route === shortestRoute;
+    return `
+      <div class="route-info" style="background: ${isShortest ? '#e6f2ff' : '#f5f5f5'}">
+        <strong>Route ${index + 1}:</strong> ${distance} km
+        ${isShortest ? '<div style="color: #3388ff;">→ Itinéraire optimal</div>' : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function getSelectedLocation(type) {
+  const selector = type === 'arrivee' ? 'Arrivee' : '';
+  const region = document.getElementById(`regionSelect${selector}`).value;
+  const delegation = document.getElementById(`delegationSelect${selector}`).value;
+  const localite = document.getElementById(`localiteSelect${selector}`).value;
+
+  return data[region]?.find(item =>
+    item.delegation === delegation &&
+    item.localite === localite
+  );
+}
+</script>
+
+</body>
+</html>
+

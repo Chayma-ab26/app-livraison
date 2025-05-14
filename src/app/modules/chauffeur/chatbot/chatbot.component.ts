@@ -11,6 +11,11 @@ export class ChatbotComponent {
   messages: { sender: 'user' | 'bot', text: string }[] = [];
   userInput = '';
   loading = false;
+  isOpen: boolean = false;
+
+  toggleChat() {
+    this.isOpen = !this.isOpen;
+  }
 
   constructor(private ai: DeepseekService) {}
 
