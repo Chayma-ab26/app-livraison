@@ -17,10 +17,43 @@ namespace application_Livraison.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-preview.2.24128.4")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DestinataireId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpediteurId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinataireId");
+
+                    b.HasIndex("ExpediteurId");
+
+                    b.ToTable("Notifications");
+                });
 
             modelBuilder.Entity("application_Livraison.Models.Facture", b =>
                 {
@@ -69,7 +102,7 @@ namespace application_Livraison.Migrations
                     b.Property<int>("LivraisonId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PointsDePassage")
+                    b.PrimitiveCollection<string>("PointsDePassage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -103,6 +136,9 @@ namespace application_Livraison.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsSeen")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Statut")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -118,33 +154,6 @@ namespace application_Livraison.Migrations
                     b.HasIndex("ChauffeurId");
 
                     b.ToTable("Livraisons");
-                });
-
-            modelBuilder.Entity("application_Livraison.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contenu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DestinataireId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExpediteurId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DestinataireId");
-
-                    b.HasIndex("ExpediteurId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("application_Livraison.Models.User", b =>
@@ -175,6 +184,25 @@ namespace application_Livraison.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Utilisateurs");
+                });
+
+            modelBuilder.Entity("Notification", b =>
+                {
+                    b.HasOne("application_Livraison.Models.User", "Destinataire")
+                        .WithMany("NotificationsRecues")
+                        .HasForeignKey("DestinataireId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("application_Livraison.Models.User", "Expediteur")
+                        .WithMany("NotificationsEnvoyees")
+                        .HasForeignKey("ExpediteurId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Destinataire");
+
+                    b.Navigation("Expediteur");
                 });
 
             modelBuilder.Entity("application_Livraison.Models.Facture", b =>
@@ -214,25 +242,6 @@ namespace application_Livraison.Migrations
                     b.Navigation("Admin");
 
                     b.Navigation("Chauffeur");
-                });
-
-            modelBuilder.Entity("application_Livraison.Models.Notification", b =>
-                {
-                    b.HasOne("application_Livraison.Models.User", "Destinataire")
-                        .WithMany("NotificationsRecues")
-                        .HasForeignKey("DestinataireId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("application_Livraison.Models.User", "Expediteur")
-                        .WithMany("NotificationsEnvoyees")
-                        .HasForeignKey("ExpediteurId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Destinataire");
-
-                    b.Navigation("Expediteur");
                 });
 
             modelBuilder.Entity("application_Livraison.Models.Livraison", b =>

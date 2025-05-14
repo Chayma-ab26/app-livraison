@@ -137,6 +137,16 @@
   },
   {
     "ContainingType": "application_Livraison.Controllers.FactureController",
+    "Method": "GetFactureCount",
+    "RelativePath": "api/Facture/count-factures",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "application_Livraison.Controllers.FactureController",
     "Method": "ExportPdf",
     "RelativePath": "api/Facture/export-pdf/{factureId}",
     "HttpMethod": "GET",

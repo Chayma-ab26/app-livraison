@@ -21,5 +21,6 @@
         // Itinéraire lié
         public Itineraire Itineraire { get; set; }
         public Facture Facture { get; set; }
+        public bool IsSeen { get; internal set; }
     }
 }

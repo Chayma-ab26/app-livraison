@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\C#\\application-Livraison\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\models\\livraison.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:models\\livraison.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:controllers\\facturecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\models\\itineraire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:models\\itineraire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|d:\\c#\\application-livraison\\controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FE0ED49-E4F9-4000-B477-ED0E3A8CA270}|application-Livraison.csproj|solutionrelative:controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,92 +26,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LivraisonController.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Controllers\\LivraisonController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LivraisonController.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\LivraisonController.cs",
-              "RelativeToolTip": "Controllers\\LivraisonController.cs",
-              "ViewState": "AgIAACABAAAAAAAAAAAcwCsBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T21:24:27.341Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\C#\\application-Livraison\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
               "ToolTip": "D:\\C#\\application-Livraison\\Models\\User.cs",
               "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA5wB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T21:33:43.964Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAwwK4AAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T21:34:16.803Z"
+              "WhenOpened": "2025-05-14T00:59:07.485Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Livraison.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Models\\Livraison.cs",
-              "RelativeDocumentMoniker": "Models\\Livraison.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Models\\Livraison.cs",
-              "RelativeToolTip": "Models\\Livraison.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAgwBIAAAAVAAAAAAAAAA==",
+              "Title": "FactureController.cs",
+              "DocumentMoniker": "D:\\C#\\application-Livraison\\Controllers\\FactureController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FactureController.cs",
+              "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\FactureController.cs",
+              "RelativeToolTip": "Controllers\\FactureController.cs",
+              "ViewState": "AgIAALAAAAAAAAAAAAAgwLYAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T21:34:08.273Z"
+              "WhenOpened": "2025-05-14T00:12:11.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "D:\\C#\\application-Livraison\\Services\\NotificationService.cs",
+              "RelativeDocumentMoniker": "Services\\NotificationService.cs",
+              "ToolTip": "D:\\C#\\application-Livraison\\Services\\NotificationService.cs",
+              "RelativeToolTip": "Services\\NotificationService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAgwDIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T00:05:01.418Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAYwEkAAAAFAAAAAAAAAA==",
+              "Title": "LivraisonController.cs",
+              "DocumentMoniker": "D:\\C#\\application-Livraison\\Controllers\\LivraisonController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LivraisonController.cs",
+              "ToolTip": "D:\\C#\\application-Livraison\\Controllers\\LivraisonController.cs",
+              "RelativeToolTip": "Controllers\\LivraisonController.cs",
+              "ViewState": "AgIAAIECAAAAAAAAAAAuwJYCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T15:25:05.637Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Itineraire.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Models\\Itineraire.cs",
-              "RelativeDocumentMoniker": "Models\\Itineraire.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Models\\Itineraire.cs",
-              "RelativeToolTip": "Models\\Itineraire.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T23:29:44.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Notification.cs",
-              "DocumentMoniker": "D:\\C#\\application-Livraison\\Models\\Notification.cs",
-              "RelativeDocumentMoniker": "Models\\Notification.cs",
-              "ToolTip": "D:\\C#\\application-Livraison\\Models\\Notification.cs",
-              "RelativeToolTip": "Models\\Notification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T23:30:17.321Z"
+              "WhenOpened": "2025-05-13T19:34:57.062Z"
             }
           ]
         }

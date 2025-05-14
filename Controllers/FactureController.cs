@@ -180,7 +180,7 @@ namespace application_Livraison.Controllers
 
   <div class='header'>
     <div class='company-info'>
-      <h1>Votre Société</h1>
+      <h1>Delivery Pro</h1>
       <p> Tunis</p>
       <p>Email : contact@societe.com</p>
       <p>Tél : +216 00 000 000</p>
@@ -262,48 +262,14 @@ namespace application_Livraison.Controllers
         }
 
 
+        [HttpGet("count-factures")]
+        public IActionResult GetFactureCount()
+        {
+            var count = _context.Factures.Count();
+            return Ok(new { total = count });
+        }
 
-        /* [HttpGet("export-pdf/{factureId}")]
-         public IActionResult ExportPdf(int factureId, [FromServices] IConverter converter)
-         {
-             var facture = _context.Factures
-                 .Include(f => f.Livraison)
-                 .FirstOrDefault(f => f.Id == factureId);
 
-             if (facture == null)
-                 return NotFound("Facture introuvable.");
-
-            string html = $@"
-
-         <h1>Facture #{facture.Id}</h1>
-         <p><strong>Client:</strong> {facture.Client}</p>
-         <p><strong>Adresse de livraison:</strong> {facture.AdresseLivraison}</p>
-         <p><strong>Produit:</strong> {facture.Produit}</p>
-         <p><strong>Prix Produit:</strong> {facture.PrixProduit} TND</p>
-         <p><strong>Frais Livraison:</strong> {facture.PrixLivraison} TND</p>
-         <p><strong>Total:</strong> {facture.PrixTotal} TND</p>
-         <p><strong>Date d'émission:</strong> {facture.DateEmission.ToShortDateString()}</p>";
-
-             var doc = new HtmlToPdfDocument()
-             {
-                 GlobalSettings = {
-                 PaperSize = PaperKind.A4,
-                 Orientation = Orientation.Portrait,
-                 DocumentTitle = $"Facture_{facture.Id}"
-             },
-                 Objects = {
-                 new ObjectSettings()
-                 {
-                     HtmlContent = html,
-                     WebSettings = { DefaultEncoding = "utf-8" }
-                 }
-             }
-             };
-
-             byte[] pdf = converter.Convert(doc);
-             return File(pdf, "application/pdf", $"Facture_{facture.Id}.pdf");
-         }
-         */
         public class FactureDto
         {
 

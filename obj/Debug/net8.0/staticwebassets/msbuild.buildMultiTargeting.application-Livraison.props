@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\application-Livraison.props" />
-</Project>

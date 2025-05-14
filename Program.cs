@@ -6,6 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using application_Livraison.Helpers;
+using application_Livraison.Hubs;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using application_Livraison.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
@@ -47,11 +51,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 // Configuration des autorisations
 builder.Services.AddAuthorization();
-
+builder.Services.AddSignalR();
+// Configuration de la sérialisation JSON
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 // Configuration des contrôleurs
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddScoped<NotificationService>();
 
 // Création de l'application
 var app = builder.Build();
@@ -64,5 +76,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();
