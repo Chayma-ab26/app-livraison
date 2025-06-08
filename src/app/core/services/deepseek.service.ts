@@ -4,8 +4,8 @@ import axios, { AxiosError } from 'axios';
 @Injectable({ providedIn: 'root' })
 export class DeepseekService {
   private readonly apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-  private readonly apiKey = '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';
-  private readonly weatherApiKey = '8326ff3ae9810d407f1b2d3147999189';
+  private readonly apiKey = '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';
+  private readonly weatherApiKey = '305776a8c34cfa52043c6e05fd0b17f1';
   private readonly routeApiKey = '5b3ce3597851110001cf62485394a7df23dd47d6911c10db19e46212';
 
   // 🔁 Chatbot IA
